@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>고민 접수</title>
+<style>
+body{margin:0;font-family:-apple-system;background:#f6f6f6;display:flex;justify-content:center}
+.wrap{max-width:420px;width:100%;padding:24px;text-align:center}
+h1{font-size:22px;margin-top:60px}
+p{color:#666;margin:12px 0 32px}
+textarea{width:100%;height:120px;border-radius:12px;border:1px solid #ccc;padding:12px;font-size:16px;resize:none;}
+button{margin-top:24px;width:100%;padding:14px;font-size:16px;border:none;border-radius:14px;background:#000;color:#fff;cursor:pointer;}
+button:disabled{background:#999;cursor:not-allowed;}
+.small{margin-top:16px;font-size:12px;color:#999}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="title"></h1>
+  <p>고민 하나만 적어봄.</p>
+  <textarea id="worryInput" placeholder="적어준 고민은 대나무숲에 묻어둘게. (관리자만 봄)"></textarea>
+  <button id="sendBtn" onclick="sendAndGo()">답 받기</button>
+  <div class="small">한 번만 가능.</div>
+</div>
+
+<script>
+[cite_start]// 사용자 명단 (총 33명) [cite: 1, 2]
+const USERS=[
+"고연우","곽민준","김가윤","김동균","김서현","김주은","김현우",
+"박동국","박소윤","박시온","손시우","안지연","양지민","오상현","오수아",
+"위인성","이다해","이승훈","이윤지","이주아","이준희","이지효","이태호",
+"이현준","임서현","장채원","정윤하","조인형","지병욱","최시윤","최준혁",
+"김가현","김현우"
+];
+
+// ★ 적용된 구글 웹 앱 URL ★
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykDuVl_i-7yEwy3eSZaoc_2A4kShtI51tQxmMcwYofLjOv1ygzhHUR162egRNgu_Aq/exec";
+
+// URL 파라미터 처리 (?u=번호)
+const p = new URLSearchParams(location.search);
+const u = parseInt(p.get("u"), 10) || 1;
+const userName = USERS[u-1] || "방문자"; [cite_start]// [cite: 3]
+
+document.getElementById("title").textContent = `${userName}님. 고민 접수됨.`;
+
+function sendAndGo(){
+  const worryText = document.getElementById("worryInput").value;
+  const btn = document.getElementById("sendBtn");
+
+  // 버튼 비활성화 (중복 전송 방지)
+  btn.disabled = true;
+  btn.textContent = "저장 중...";
+
+  // 1. 구글 시트로 데이터 전송
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: userName,
+      worry: worryText
+    }),
+  })
+  .then(() => {
+    // 2. 전송 완료 후 결과 페이지로 이동
+    goNextPage();
+  })
+  .catch((error) => {
+    // 에러가 발생해도 사용자는 결과 페이지로 이동시켜 경험을 끊지 않음
+    console.error("Error:", error);
+    goNextPage();
+  });
+}
+
+function goNextPage(){
+  const a = Math.floor(Math.random()*100); [cite_start]// 0~99 랜덤 답변 번호 생성 [cite: 3]
+  location.href = `answer.html?u=${u}&a=${a}`;
+}
+</script>
+</body>
+</html>
