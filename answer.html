@@ -2,83 +2,104 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>해결 완료</title>
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 <style>
+/* CSS 수정: 화면 꽉 차게 + 정중앙 정렬 + 스크롤 방지 */
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Gamja Flower', cursive;
-  background-color: #e0f7fa; /* 연한 하늘색 배경 */
+  background-color: #e0f7fa;
   background-image: radial-gradient(#81d4fa 2px, transparent 2px);
-  background-size: 30px 30px; /* 땡땡이 패턴 */
+  background-size: 30px 30px;
+  /* 화면 정중앙 배치 핵심 코드 */
   display: flex;
+  align-items: center; 
   justify-content: center;
-  overflow: hidden; /* 스크롤 방지 */
+  min-height: 100vh; /* 화면 높이 100% 사용 */
+  overflow: hidden; /* 스크롤바 강제 제거 */
 }
+
 .scene {
   perspective: 1200px;
-  margin-top: 60px;
-}
-.card {
+  /* margin-top 삭제 -> flex로 중앙 정렬함 */
   width: 300px;
   height: 450px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 팅~ 하는 효과 */
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
 }
+
 .card.flipped {
   transform: rotateY(180deg);
 }
+
 .face {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   border-radius: 20px;
-  border: 4px solid #000; /* 두꺼운 테두리 */
+  border: 4px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
   background: #fff;
+  /* 텍스트 드래그 방지 */
+  -webkit-user-select: none;
+  user-select: none;
 }
-/* 카드 앞면 (물음표) */
+
 .front {
-  background: #ffecb3; /* 진한 노란색 */
+  background: #ffecb3;
   font-size: 28px;
   color: #333;
+  z-index: 2; /* 앞면이 확실히 위에 오도록 */
 }
-/* 카드 뒷면 (결과) */
+
 .back {
   transform: rotateY(180deg);
   padding: 20px;
   text-align: center;
   background: #fff;
-  overflow: hidden; /* 이미지 튀어나감 방지 */
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  z-index: 1;
 }
-/* 이미지 스타일 */
+
 .result-img {
-  max-width: 80%;
-  max-height: 200px;
+  max-width: 90%;
+  max-height: 180px;
   object-fit: contain;
   margin-bottom: 20px;
   border: 2px solid #000;
   border-radius: 10px;
-  display: none; /* 이미지가 없으면 숨김 */
+  display: none;
 }
+
 .icon {
   font-size: 60px;
   margin-bottom: 20px;
 }
+
 .answer {
   font-size: 32px;
   line-height: 1.3;
   color: #000;
   word-break: keep-all;
 }
+
 .meta {
   position: absolute;
   bottom: 20px;
@@ -96,9 +117,7 @@ body {
     </div>
     <div class="face back">
       <img id="resultImg" class="result-img" src="" alt="결과 이미지">
-      
       <div class="icon" id="icon"></div>
-      
       <div class="answer" id="answer"></div>
       <div class="meta">캡쳐해서 간직해! ✨</div>
     </div>
@@ -106,7 +125,7 @@ body {
 </div>
 
 <script>
-// 100개의 답변 데이터 (콤마 오류 수정 완료)
+// 답변 데이터
 const ANSWERS = [
   {icon:"🛡",text:"그건 네 잘못 아님."},
   {icon:"🙆‍♀️",text:"너는 충분히 잘하고 있음."},
@@ -211,42 +230,48 @@ const ANSWERS = [
   {icon:"🧸",text:"애착인형 안고 있어."}
 ];
 
-// URL 처리
 const p = new URLSearchParams(location.search);
 const a = parseInt(p.get("a"), 10) || 0;
 const card = document.getElementById("card");
+const imgEl = document.getElementById("resultImg");
+const iconEl = document.getElementById("icon");
 
-// 데이터 채우기 (안전장치 포함)
-const selectedAnswer = ANSWERS[a % ANSWERS.length];
-if (selectedAnswer) {
-    document.getElementById("icon").textContent = selectedAnswer.icon;
-    document.getElementById("answer").textContent = selectedAnswer.text;
+const selectedAnswer = ANSWERS[a % ANSWERS.length] || ANSWERS[0];
+
+// 이미지 처리 로직
+if (selectedAnswer.img && selectedAnswer.img !== "") {
+  imgEl.src = selectedAnswer.img;
+  imgEl.style.display = "block";
+  iconEl.style.display = "none";
 } else {
-    document.getElementById("icon").textContent = "🤔";
-    document.getElementById("answer").textContent = "다시 시도해봐.";
+  imgEl.style.display = "none";
+  iconEl.textContent = selectedAnswer.icon;
+  iconEl.style.display = "block";
 }
 
-// 쿠키 체크 (이미 본 사람 체크)
-if (document.cookie.includes("used")) {
+document.getElementById("answer").textContent = selectedAnswer.text;
+
+// ★★★ 수정: 테스트를 위해 쿠키 체크 로직 잠시 주석 처리 ★★★
+// (나중에 실제 친구들 줄 때 아래 3줄 주석을 풀면 됩니다)
+
+/* if (document.cookie.includes("used")) {
   card.classList.add("flipped");
 }
+*/
 
-// 클릭 이벤트 (하루 1번 제한 적용)
 card.onclick = function() {
-  // 이미 사용했으면(쿠키가 있으면) 뒤집지 않음
+  // ★★★ 수정: 중복 클릭 방지 주석 처리 (테스트용 무한 클릭 가능) ★★★
+  /*
   if (document.cookie.includes("used")) {
       return; 
   }
+  */
   
-  card.classList.add("flipped");
+  // 클릭할 때마다 뒤집기 (toggle 사용)
+  card.classList.toggle("flipped");
   
-  // 쿠키 굽기 (유효기간: 하루 86400초)
-  document.cookie = "used=true;max-age=86400;path=/";
+  // document.cookie = "used=true;max-age=86400;path=/";
 };
 </script>
 </body>
 </html>
-
-
-
-
