@@ -6,13 +6,13 @@
 <title>보케샘의 고민상담소</title>
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 <style>
-/* 전체 스타일 */
+/* 1. 전체 스타일 */
 body {
   margin: 0;
-  font-family: 'Gamja Flower', cursive; /* 귀여운 폰트 적용 */
-  background-color: #fff9c4; /* 연한 노란색 배경 */
+  font-family: 'Gamja Flower', cursive;
+  background-color: #fff9c4;
   background-image: radial-gradient(#ddd 1px, transparent 1px);
-  background-size: 20px 20px; /* 모눈종이 패턴 */
+  background-size: 20px 20px;
   display: flex;
   justify-content: center;
   color: #333;
@@ -23,35 +23,36 @@ body {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
+  padding-bottom: 80px; /* 아래 여백 확보 */
 }
 h1 {
   font-size: 32px;
   margin-top: 50px;
-  text-shadow: 2px 2px 0px #fff; /* 글자 뒤 흰색 그림자 */
+  text-shadow: 2px 2px 0px #fff;
 }
 p {
   font-size: 20px;
   margin: 10px 0 30px;
 }
-/* 입력창 꾸미기 */
+
+/* 2. 입력창 & 버튼 꾸미기 */
 textarea {
   width: 100%;
   height: 140px;
-  border: 3px solid #000; /* 두꺼운 검은 테두리 */
+  border: 3px solid #000;
   border-radius: 15px;
   padding: 15px;
   font-size: 20px;
   font-family: 'Gamja Flower', cursive;
   resize: none;
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.1); /* 그림자 */
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
   outline: none;
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  box-sizing: border-box;
 }
 textarea:focus {
   background-color: #fff;
-  box-shadow: 5px 5px 0px #ff6b6b; /* 클릭하면 분홍 그림자 */
+  box-shadow: 5px 5px 0px #ff6b6b;
 }
-/* 버튼 꾸미기 */
 button {
   margin-top: 25px;
   width: 100%;
@@ -60,14 +61,14 @@ button {
   font-family: 'Gamja Flower', cursive;
   border: 3px solid #000;
   border-radius: 50px;
-  background: #ff6b6b; /* 쨍한 분홍색 */
+  background: #ff6b6b;
   color: #fff;
   cursor: pointer;
-  box-shadow: 4px 4px 0px #000; /* 만화 같은 그림자 */
+  box-shadow: 4px 4px 0px #000;
   transition: 0.1s;
 }
 button:active {
-  transform: translate(4px, 4px); /* 누르면 눌리는 효과 */
+  transform: translate(4px, 4px);
   box-shadow: 0px 0px 0px #000;
 }
 button:disabled {
@@ -81,58 +82,64 @@ button:disabled {
   font-size: 16px;
   color: #777;
 }
+
+/* 3. 방명록 영역 스타일 (아까 꼬였던 부분 정리) */
+.guestbook-area {
+  margin-top: 60px;
+  border-top: 3px dashed #bbb; /* 점선 */
+  padding-top: 40px;
+  text-align: center;
+}
+.guestbook-area h2 {
+  font-family: 'Gamja Flower', cursive;
+  font-size: 26px;
+  color: #555;
+  margin-bottom: 20px;
+  background: #fff;
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 2px solid #ddd;
+}
+
+/* 패들렛 프레임 */
+.padlet-frame {
+  width: 100%;
+  height: 500px;
+  border: 3px solid #000;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+}
+.padlet-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block; /* 공백 제거 */
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1 id="title"></h1>
-  <p>고민있구나? 걱정마 샘이 해결함!</p>
-  <textarea id="worryInput" placeholder="적어준 고민은 답변과 함께 저 우주로 날려보내니 걱정말라고!"></textarea>
-  <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민해결!</button>
-  <div class="small">평생 무료지만 하루 한 번만 가능(신중필요)</div>
-</div>
-<div class="guestbook-area">
-    <h2>📢 3학년 17반  수다방!</h2>
-    <div class="padlet-frame">
-     <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px"><a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><div style="display:flex;align-items:center;"><img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="Padlet으로 만듦"></div></a></div></div>  
-      </div>
-  </div>
-  </div>
-
-  /* 방명록 영역 스타일 */
-.guestbook-area {
-  margin-top: 50px;
-  border-top: 3px dashed #aaa; /* 점선으로 구분 */
-  padding-top: 30px;
-  text-align: left;
-}
-
-.guestbook-area h2 {
-  font-family: 'Gamja Flower', cursive;
-  font-size: 24px;
-  color: #555;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-/* 패들렛 프레임 꾸미기 */
-.padlet-frame {
-  width: 100%;
-  height: 400px; /* 방명록 높이 */
-  border: 3px solid #000; /* 검은 테두리 */
-  border-radius: 15px;
-  overflow: hidden; /* 둥근 모서리 유지 */
-  background: #fff;
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
-}
-
-.padlet-frame iframe {
-  width: 100%;
-  height: 100%;
-  border: none; /* 기본 테두리 제거 */
-}
+  <p>고민 있구나? 걱정 마 샘이 해결함!</p>
   
-  <script>
+  <textarea id="worryInput" placeholder="적어준 고민은 답변과 함께 저 우주로 날려보내니 걱정 말라고!"></textarea>
+  <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민 해결!</button>
+  <div class="small">평생 무료지만 하루 한 번만 가능 (신중 필요)</div>
+
+  <div class="guestbook-area">
+    <h2>📢 3학년 17반 수다방!</h2>
+    <div class="padlet-frame">
+      <iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 사용자 명단 (업데이트됨)
 const USERS=[
 "연우","민준이","가윤이","동균이","서현이","주은이","현우",
 "동국이","소윤이","시온이","시우","지연이","지민이","상현이","수아",
@@ -141,23 +148,36 @@ const USERS=[
 "가현이","현우","지윤이", "슈니"
 ];
 
+// 스크립트 URL
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykDuVl_i-7yEwy3eSZaoc_2A4kShtI51tQxmMcwYofLjOv1ygzhHUR162egRNgu_Aq/exec";
+
+// 멈춤 방지용 플래그
+let isMoving = false;
 
 // URL 파라미터 처리
 const p = new URLSearchParams(location.search);
 const u = parseInt(p.get("u"), 10) || 1;
 const userName = USERS[u-1] || "방문자"; 
 
-// 제목에 이름 표시
+// 제목 설정
 document.getElementById("title").textContent = `${userName}의 고민 접수!`;
 
 function sendAndGo(){
   const worryText = document.getElementById("worryInput").value;
   const btn = document.getElementById("sendBtn");
 
+  // 내용 없으면 경고 (선택사항)
+  if(!worryText.trim()){
+      alert("고민을 적어야 해결해주지!");
+      return;
+  }
+
   // 버튼 비활성화
   btn.disabled = true;
   btn.textContent = "고민 해결 중...";
+
+  // ★ 중요: 1.5초 후 무조건 다음 페이지로 이동 (안전장치 복구)
+  setTimeout(() => { goNextPage(); }, 1500);
 
   // 데이터 전송
   fetch(SCRIPT_URL, {
@@ -181,21 +201,11 @@ function sendAndGo(){
 }
 
 function goNextPage(){
+  if (isMoving) return; 
+  isMoving = true;
   const a = Math.floor(Math.random()*100);
   location.href = `answer.html?u=${u}&a=${a}`;
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
+</html>
