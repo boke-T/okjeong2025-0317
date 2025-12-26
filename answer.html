@@ -32,7 +32,7 @@ body{margin:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 </div>
 
 <script>
-// 답변 데이터 100개
+// 100개의 답변 데이터 (콤마 오류 수정 완료)
 const ANSWERS = [
   {icon:"🛡",text:"그건 네 잘못 아님."},
   {icon:"🙆‍♀️",text:"너는 충분히 잘하고 있음."},
@@ -44,56 +44,131 @@ const ANSWERS = [
   {icon:"💖",text:"너 자신부터 챙겨."},
   {icon:"🌈",text:"비 온 뒤에 땅 굳음."},
   {icon:"🧗",text:"버티는 게 이기는 거임."},
+  {icon:"👏",text:"박수 칠 때 떠나지 말고 즐겨."},
+  {icon:"👑",text:"주인공은 너임. 쫄지 마."},
+  {icon:"🍀",text:"뜻밖의 행운이 올 거임."},
+  {icon:"🔋",text:"방전됨. 충전 필요."},
+  {icon:"🌤",text:"내일은 맑음 예정."},
   {icon:"🚀",text:"지금 당장 시작해."},
   {icon:"🏃",text:"일단 저지르고 봐."},
   {icon:"🔥",text:"불태워버려. 가능함."},
   {icon:"👀",text:"눈치 보지 말고 고."},
   {icon:"📢",text:"목소리를 더 높여."},
+  {icon:"👊",text:"한 방 먹여줘."},
+  {icon:"🚪",text:"문 열려 있음. 나가봐."},
+  {icon:"🎢",text:"즐기면 그만임."},
+  {icon:"👠",text:"자신감 갖고 걷기."},
+  {icon:"🎯",text:"목표가 코앞임."},
+  {icon:"🤝",text:"도움 요청해도 됨."},
+  {icon:"💃",text:"춤추듯 가볍게."},
+  {icon:"✈️",text:"멀리 떠나보는 건 어때?"},
+  {icon:"🎹",text:"네 리듬대로 해."},
+  {icon:"🏗",text:"기초부터 다시 쌓자."},
   {icon:"⏸",text:"지금은 안 해도 됨."},
   {icon:"🛑",text:"잠깐 멈추는 게 답임."},
   {icon:"🛌",text:"일단 자고 생각하자."},
   {icon:"🙅",text:"거절해도 괜찮아."},
   {icon:"📦",text:"그만 생각해도 됨."},
+  {icon:"🙈",text:"못 본 척 넘어가."},
+  {icon:"🏳️",text:"포기하는 것도 용기임."},
+  {icon:"🐢",text:"천천히 가도 안 늦음."},
+  {icon:"🔌",text:"로그아웃이 필요해."},
+  {icon:"🤔",text:"한 번 더 고민해봐."},
+  {icon:"🌫",text:"안개 걷힐 때까지 대기."},
+  {icon:"🚧",text:"지금은 공사 중."},
+  {icon:"🤫",text:"비밀로 하는 게 좋겠어."},
+  {icon:"📉",text:"기대치를 좀 낮춰."},
+  {icon:"🚽",text:"다 배출하고 잊어."},
   {icon:"💡",text:"생각보다 별거 아님."},
   {icon:"🔁",text:"방향 바꿔도 늦지 않음."},
   {icon:"🗝",text:"답은 이미 네가 암."},
   {icon:"⚖️",text:"균형 잡는 중임."},
+  {icon:"🕶",text:"색안경 끼고 보지 마."},
+  {icon:"💸",text:"돈으로 해결될 문제임."},
+  {icon:"🗑",text:"쓰레기는 쓰레기통에."},
+  {icon:"✂️",text:"끊을 건 끊어야 함."},
+  {icon:"📝",text:"기록해두면 쓸모 있음."},
+  {icon:"🎓",text:"이것도 다 배움임."},
+  {icon:"🧹",text:"정리가 좀 필요함."},
+  {icon:"🧩",text:"퍼즐이 곧 맞춰짐."},
+  {icon:"📍",text:"지금 위치도 나쁘지 않음."},
+  {icon:"🔄",text:"다시 시작하면 됨."},
+  {icon:"🧱",text:"벽이 아니라 문일 수도."},
+  {icon:"🔨",text:"깨부수고 나와."},
   {icon:"🍔",text:"맛있는 거 먹으면 해결됨."},
   {icon:"🍺",text:"맥주 한 캔 딱 따."},
   {icon:"🍰",text:"당 떨어져서 그래."},
   {icon:"🍗",text:"치킨이 답이다."},
   {icon:"☕️",text:"커피 수혈 시급함."},
+  {icon:"🌶",text:"매운 거 먹고 스트레스 풀어."},
+  {icon:"🍖",text:"고기 앞으로 가라."},
+  {icon:"🍦",text:"아이스크림 먹고 식혀."},
+  {icon:"🥗",text:"오늘은 좀 가볍게 먹자."},
+  {icon:"🍜",text:"라면 먹고 갈래?"},
+  {icon:"👥",text:"사람 너무 믿지 마."},
+  {icon:"🤬",text:"욕 한번 하고 털어."},
+  {icon:"👂",text:"남의 말 듣지 마."},
+  {icon:"👋",text:"손절 타이밍임."},
+  {icon:"💌",text:"먼저 연락해 봐."},
+  {icon:"🎁",text:"너한테 선물해."},
+  {icon:"👯",text:"친구랑 수다 떨어."},
+  {icon:"🐶",text:"강아지/고양이가 답임."},
+  {icon:"🌵",text:"가시 세우지 마."},
+  {icon:"🌻",text:"해바라기처럼 한 곳만 봐."},
   {icon:"🔮",text:"마법의 소라고둥도 모른대."},
   {icon:"🎰",text:"인생은 도박임. 걸어봐."},
   {icon:"👻",text:"아무 일도 없던 거야."},
-  {icon:"🎮",text:"다시하기 버튼 누를 때."}
-  // (에러 방지를 위해 일단 깔끔한 33개로 줄였습니다. 잘 되면 나중에 늘리세요!)
+  {icon:"👽",text:"외계인의 소행임."},
+  {icon:"🎮",text:"다시하기 버튼 누를 때."},
+  {icon:"🎬",text:"영화 같은 반전 있음."},
+  {icon:"🎵",text:"노래방 가서 질러."},
+  {icon:"🛌",text:"이불 밖은 위험해."},
+  {icon:"🛀",text:"따뜻한 물에 지져."},
+  {icon:"💊",text:"비타민이나 챙겨 먹어."},
+  {icon:"🗓",text:"오늘만 날이 아님."},
+  {icon:"💰",text:"돈이 최고야."},
+  {icon:"📱",text:"폰 끄고 잠수 타."},
+  {icon:"🎉",text:"축하할 일이 생길 거야."},
+  {icon:"🎊",text:"대박 조짐이 보임."},
+  {icon:"🧨",text:"펑 터지기 일보 직전."},
+  {icon:"🏝",text:"휴가 계획이나 짜자."},
+  {icon:"🚦",text:"초록불임. 건너가."},
+  {icon:"🚲",text:"두 발 떼고 굴러봐."},
+  {icon:"🧸",text:"애착인형 안고 있어."}
 ];
 
-// URL에서 답변 번호 가져오기
+// URL 처리
 const p = new URLSearchParams(location.search);
 const a = parseInt(p.get("a"), 10) || 0;
 const card = document.getElementById("card");
 
-// 답변 내용 채워넣기
-// 배열 길이보다 큰 숫자가 와도 안전하게 처리 (%)
+// 데이터 채우기 (안전장치 포함)
 const selectedAnswer = ANSWERS[a % ANSWERS.length];
-
 if (selectedAnswer) {
     document.getElementById("icon").textContent = selectedAnswer.icon;
     document.getElementById("answer").textContent = selectedAnswer.text;
 } else {
-    // 혹시 데이터가 없을 경우 대비
     document.getElementById("icon").textContent = "🤔";
     document.getElementById("answer").textContent = "다시 시도해봐.";
 }
 
-// 클릭 이벤트 (테스트용: 무제한 클릭 가능)
-card.onclick = function() {
-  // 'flipped' 클래스를 껐다 켰다(toggle) 함
-  card.classList.toggle("flipped");
-};
+// 쿠키 체크 (이미 본 사람 체크)
+if (document.cookie.includes("used")) {
+  card.classList.add("flipped");
+}
 
-// 로그 찍어서 확인
-console.log("스크립트 정상 로드됨", selectedAnswer);
+// 클릭 이벤트 (하루 1번 제한 적용)
+card.onclick = function() {
+  // 이미 사용했으면(쿠키가 있으면) 뒤집지 않음
+  if (document.cookie.includes("used")) {
+      return; 
+  }
+  
+  card.classList.add("flipped");
+  
+  // 쿠키 굽기 (유효기간: 하루 86400초)
+  document.cookie = "used=true;max-age=86400;path=/";
+};
 </script>
+</body>
+</html>
