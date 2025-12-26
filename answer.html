@@ -91,12 +91,16 @@ body {
 <div class="scene">
   <div class="card" id="card">
     <div class="face front">
-      <span>터치해서 뒤집기 👆</span>
+      <div style="font-size:60px;">💌</div>
+      <div style="margin-top:20px;">도착한 답장 확인하기<br>(터치)</div>
     </div>
     <div class="face back">
+      <img id="resultImg" class="result-img" src="" alt="결과 이미지">
+      
       <div class="icon" id="icon"></div>
+      
       <div class="answer" id="answer"></div>
-      <div class="meta">이 답변이 최선이야...</div>
+      <div class="meta">캡쳐해서 간직해! ✨</div>
     </div>
   </div>
 </div>
@@ -242,6 +246,7 @@ card.onclick = function() {
 </script>
 </body>
 </html>
+
 
 
 
