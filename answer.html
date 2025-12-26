@@ -6,7 +6,7 @@
 <title>보케샘의 해결책</title>
 <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 <style>
-/* 1. 전체 스타일 (index.html과 통일) */
+/* 1. 전체 스타일 */
 body {
   margin: 0;
   font-family: 'Gamja Flower', cursive;
@@ -15,6 +15,8 @@ body {
   background-size: 20px 20px;
   display: flex;
   justify-content: center;
+  align-items: center; /* 중앙 정렬 */
+  min-height: 100vh;   /* 화면 꽉 차게 */
   color: #333;
 }
 .wrap {
@@ -23,7 +25,6 @@ body {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
-  padding-bottom: 80px; 
 }
 
 /* 2. 결과 화면 스타일 */
@@ -31,21 +32,22 @@ body {
   background: #fff;
   border: 3px solid #000;
   border-radius: 15px;
-  padding: 30px;
+  padding: 40px 20px; /* 안쪽 여백 넉넉하게 */
   margin-top: 20px;
   box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
 }
 .icon {
   font-size: 80px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .text {
   font-size: 28px;
   word-break: keep-all;
   line-height: 1.4;
+  font-weight: bold;
 }
 button {
-  margin-top: 30px;
+  margin-top: 40px;
   width: 100%;
   padding: 15px;
   font-size: 24px;
@@ -62,40 +64,6 @@ button:active {
   transform: translate(4px, 4px);
   box-shadow: 0px 0px 0px #000;
 }
-
-/* 3. 방명록 영역 (추가됨!) */
-.guestbook-area {
-  margin-top: 50px;
-  border-top: 3px dashed #bbb;
-  padding-top: 40px;
-  text-align: center;
-}
-.guestbook-area h2 {
-  font-family: 'Gamja Flower', cursive;
-  font-size: 24px;
-  color: #555;
-  margin-bottom: 20px;
-  background: #fff;
-  display: inline-block;
-  padding: 5px 15px;
-  border-radius: 20px;
-  border: 2px solid #ddd;
-}
-.padlet-frame {
-  width: 100%;
-  height: 500px;
-  border: 3px solid #000;
-  border-radius: 15px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
-}
-.padlet-frame iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
 </style>
 </head>
 <body>
@@ -109,22 +77,15 @@ button:active {
   </div>
 
   <button onclick="goBack()">다른 고민 또 물어보기</button>
-
-  <div class="guestbook-area">
-    <h2>📢 3학년 17반 수다방!</h2>
-    <div class="padlet-frame">
-      <iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
-    </div>
-  </div>
 </div>
 
 <script>
-// URL에서 파라미터 가져오기
+// URL 파라미터 받기
 const p = new URLSearchParams(location.search);
 const u = parseInt(p.get("u"), 10) || 1; 
 const a = parseInt(p.get("a"), 10) || 0; 
 
-// 사용자 이름 (index.html과 동일해야 함)
+// 사용자 명단
 const USERS=[
 "연우","민준이","가윤이","동균이","서현이","주은이","현우",
 "동국이","소윤이","시온이","시우","지연이","지민이","상현이","수아",
@@ -136,6 +97,127 @@ const USERS=[
 const name = USERS[u-1] || "방문자";
 document.getElementById("userNameTitle").textContent = `${name}아(야), 해결책 도착!`;
 
-// ★★★ 주제별 답변 리스트 (index.html의 눈치 기능과 짝꿍) ★★★
+// ★★★ 답변 데이터 (index.html의 눈치 기능과 호환되도록 순서 유지) ★★★
 const ANSWERS = [
-  // 0~19: 기본 위로/
+  // 0~19: 기본 위로
+  {icon:"🛡",text:"그건 네 잘못 아님. 절대."},
+  {icon:"🙆‍♀️",text:"너는 충분히 잘하고 있어."},
+  {icon:"✨",text:"결국 다 잘 될 거야. 믿어."},
+  {icon:"🧘",text:"걱정은 셀프 반납해."},
+  {icon:"👍",text:"지금 그대로도 완벽해."},
+  {icon:"💊",text:"시간이 약이야. 진짜로."},
+  {icon:"🗑",text:"나쁜 기억은 휴지통으로."},
+  {icon:"💖",text:"너 자신부터 챙겨."},
+  {icon:"🌈",text:"비 온 뒤에 땅 굳는다."},
+  {icon:"🧗",text:"버티는 게 이기는 거야."},
+  {icon:"👑",text:"이 구역 주인공은 너야."},
+  {icon:"🍀",text:"뜻밖의 행운이 올 거야."},
+  {icon:"🔋",text:"방전됨. 휴식 필요."},
+  {icon:"🌤",text:"내일은 맑음 예정."},
+  {icon:"🚀",text:"지금 당장 시작해."},
+  {icon:"🏃",text:"일단 저지르고 봐."},
+  {icon:"👀",text:"눈치 보지 말고 Go."},
+  {icon:"📢",text:"목소리를 더 높여봐."},
+  {icon:"👊",text:"세상에 한 방 먹여줘."},
+  {icon:"🛌",text:"오늘은 그냥 자도 돼."},
+
+  // 20~39: 학업
+  {icon:"💯",text:"성적은 숫자에 불과해."},
+  {icon:"✏️",text:"연필 굴린 거 다 맞음."},
+  {icon:"🔥",text:"딱 10분만 더 집중해봐."},
+  {icon:"🙅",text:"포기하기엔 일러."},
+  {icon:"🎓",text:"대학이 인생 전부는 아냐."},
+  {icon:"📉",text:"내려갈 곳 없으니 올라가자."},
+  {icon:"📖",text:"이 고비만 넘기면 끝!"},
+  {icon:"🧠",text:"네 머리는 천재임. 믿어."},
+  {icon:"🏫",text:"학교 밖에도 세상은 넓어."},
+  {icon:"📝",text:"오답 노트가 널 살릴 거야."},
+  {icon:"⏳",text:"지금 노력이 헛되지 않아."},
+  {icon:"🥉",text:"3등도 잘한 거야."},
+  {icon:"🎯",text:"목표 대학 문 부수자."},
+  {icon:"📚",text:"책 덮고 잠깐 쉬어."},
+  {icon:"🙏",text:"찍신이 강림할 예정."},
+  {icon:"😰",text:"불안해? 공부했다는 증거야."},
+  {icon:"🛑",text:"잠깐 펜 놓고 스트레칭."},
+  {icon:"💪",text:"수능 대박 기운 보냄."},
+  {icon:"🖊",text:"결과는 노력한 만큼 나와."},
+  {icon:"🎉",text:"시험 끝나고 놀 생각 해!"},
+
+  // 40~59: 관계
+  {icon:"👂",text:"남의 말 너무 듣지 마."},
+  {icon:"👋",text:"손절 타이밍일 수도."},
+  {icon:"💌",text:"자존심 버리고 먼저 연락해."},
+  {icon:"👯",text:"친구랑 수다로 풀어."},
+  {icon:"🤬",text:"욕 한번 시원하게 해."},
+  {icon:"👥",text:"사람 너무 믿지 마."},
+  {icon:"🌵",text:"가시 세우지 말고 다가가."},
+  {icon:"💔",text:"더 좋은 사람 만날 거야."},
+  {icon:"💍",text:"네가 아까워. 진짜."},
+  {icon:"🤴",text:"왕자/공주병은 무시가 답."},
+  {icon:"🎁",text:"너한테 선물 하나 사줘."},
+  {icon:"🐶",text:"사람보다 강아지가 낫다."},
+  {icon:"🌻",text:"해바라기처럼 한 곳만 봐."},
+  {icon:"🔮",text:"인연이면 다시 만나."},
+  {icon:"👪",text:"가족은 결국 네 편이야."},
+  {icon:"🤐",text:"비밀은 무덤까지 가져가."},
+  {icon:"🍎",text:"먼저 사과하는 게 이기는 거."},
+  {icon:"🕶",text:"색안경 끼고 보지 마."},
+  {icon:"🤝",text:"도움 요청해도 괜찮아."},
+  {icon:"💃",text:"혼자 춤추듯 즐겨."},
+
+  // 60~79: 음식
+  {icon:"🍗",text:"치킨 시키면 해결됨."},
+  {icon:"🍔",text:"햄버거 세트 고고."},
+  {icon:"🍜",text:"라면 국물 원샷 때려."},
+  {icon:"🍰",text:"당 떨어져서 그래. 초코 먹어."},
+  {icon:"🌶",text:"매운 떡볶이가 답이다."},
+  {icon:"☕️",text:"카페인 수혈이 시급함."},
+  {icon:"🍦",text:"아이스크림으로 식혀."},
+  {icon:"🍖",text:"저기압일 땐 고기 앞으로."},
+  {icon:"🥗",text:"오늘은 좀 가볍게 먹자."},
+  {icon:"🍺",text:"시원한 물 한잔 마셔."},
+  {icon:"🍕",text:"피자 한 판 혼자 가능?"},
+  {icon:"🍫",text:"초콜릿 하나 입에 넣어."},
+  {icon:"🥐",text:"빵 냄새 맡으면 풀려."},
+  {icon:"🥘",text:"마라탕 먹으러 가자."},
+  {icon:"🥛",text:"우유 한 잔 하고 자."},
+  {icon:"🏋️‍♀️",text:"땀 흘리고 나면 개운해."},
+  {icon:"🐷",text:"먹는 게 남는 거다."},
+  {icon:"🥓",text:"다이어트는 내일부터."},
+  {icon:"🥣",text:"밥심으로 버티는 거야."},
+  {icon:"🥑",text:"건강 챙겨. 아프면 손해."},
+
+  // 80~99: 미래/돈
+  {icon:"💰",text:"돈이 최고야. 돈 벌자."},
+  {icon:"💸",text:"금융치료가 필요해."},
+  {icon:"🏦",text:"넌 나중에 부자 될 관상."},
+  {icon:"💎",text:"너라는 보석을 갈고닦는 중."},
+  {icon:"🏆",text:"성공해서 복수하자."},
+  {icon:"✈️",text:"해외로 떠날 기회가 올 거야."},
+  {icon:"🗺",text:"세상은 넓고 할 일은 많아."},
+  {icon:"🏗",text:"기초부터 다시 쌓아봐."},
+  {icon:"🗝",text:"답은 이미 네 안에 있어."},
+  {icon:"🔮",text:"미래의 네가 고마워할 걸?"},
+  {icon:"😎",text:"나중에 이불킥 할 추억임."},
+  {icon:"🛣",text:"길은 하나만 있는 게 아냐."},
+  {icon:"🚪",text:"다른 문이 열릴 거야."},
+  {icon:"🌟",text:"별처럼 빛날 날이 온다."},
+  {icon:"🎢",text:"인생은 원래 롤러코스터."},
+  {icon:"🎬",text:"반전 영화의 주인공은 너."},
+  {icon:"📅",text:"10년 뒤엔 웃으며 얘기할 걸."},
+  {icon:"🤝",text:"좋은 파트너를 만날 거야."},
+  {icon:"👔",text:"사장님이 될 운명임."},
+  {icon:"🍀",text:"로또 당첨급 행운 대기 중."}
+];
+
+// 화면 표시
+const selected = ANSWERS[a] || ANSWERS[0];
+document.getElementById("resultIcon").textContent = selected.icon;
+document.getElementById("resultText").textContent = selected.text;
+
+function goBack(){
+  location.href = `index.html?u=${u}`;
+}
+</script>
+</body>
+</html>
