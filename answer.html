@@ -15,19 +15,20 @@ body {
   background-size: 20px 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* 세로 중앙 정렬 */
   min-height: 100vh;
   color: #333;
+  padding: 20px 0; /* 위아래 여백 조금 줌 (스크롤 생길 수 있어서) */
 }
 .wrap {
   max-width: 400px;
   width: 100%;
-  padding: 30px;
+  padding: 20px;
   text-align: center;
   box-sizing: border-box;
 }
 h1 {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-shadow: 2px 2px 0px #fff;
 }
 
@@ -37,6 +38,7 @@ h1 {
   height: 300px;
   perspective: 1000px; /* 원근감 */
   cursor: pointer;
+  margin: 0 auto; /* 중앙 정렬 */
 }
 
 /* 실제 카드 (앞/뒤면을 담는 컨테이너) */
@@ -103,9 +105,9 @@ h1 {
   font-weight: bold;
 }
 
-/* 3. 캡처 힌트 문구 (추가됨!) */
+/* 3. 캡처 힌트 문구 */
 .capture-hint {
-  margin-top: 30px;
+  margin-top: 25px;
   font-size: 18px;
   color: #666;
   visibility: hidden;
@@ -119,7 +121,7 @@ h1 {
 
 /* 4. 버튼 스타일 */
 button {
-  margin-top: 15px; /* 문구와의 간격 조절 */
+  margin-top: 15px; 
   width: 100%;
   padding: 15px;
   font-size: 24px;
@@ -144,10 +146,34 @@ button:active {
   box-shadow: 0px 0px 0px #000;
 }
 
-/* 깜빡임 애니메이션 */
+/* 5. 방명록 영역 (추가됨) */
+.guestbook-box {
+  margin-top: 40px; /* 버튼과 간격 띄우기 */
+  border-top: 2px dashed #bbb; /* 구분선 */
+  padding-top: 30px;
+  display: none; /* 처음엔 숨김 (카드가 뒤집히면 보임) */
+  animation: fadeIn 1s ease-out;
+}
+.guestbook-box h3 {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+}
+iframe {
+  width: 100%;
+  height: 400px; /* 방명록 높이 */
+  border: 3px solid #000;
+  border-radius: 15px;
+  background: #fff;
+}
+
+/* 애니메이션 */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -172,6 +198,12 @@ button:active {
   <p id="captureHint" class="capture-hint">마음에 들면 캡처해서 방명록에 남겨봐! 📸</p>
 
   <button id="retryBtn" onclick="goBack()">다른 고민 또 물어보기</button>
+
+  <div class="guestbook-box" id="guestbookArea">
+    <h3>📝 방명록에 고민 해결 남기기!</h3>
+     <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px"><a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><div style="display:flex;align-items:center;"><img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="Padlet으로 만듦"></div></a></div></div>
+  </div>
+
 </div>
 
 <script>
@@ -192,7 +224,7 @@ const USERS=[
 const name = USERS[u-1] || "방문자";
 document.getElementById("userNameTitle").textContent = `${name}의 해결책 도착!`;
 
-// ★★★ 답변 데이터 (index.html과 순서 동일) ★★★
+// ★★★ 답변 데이터 (선생님이 수정하신 내용 유지) ★★★
 const ANSWERS = [
   // 0~19: 기본 위로
   {icon:"🛡",text:"그건 네 잘못 아님. 절대. 보케샘이 보장함!"},
@@ -319,10 +351,14 @@ function flipCard() {
   const card = document.getElementById("myCard");
   card.classList.add("is-flipped"); // 카드 회전
   
-  // 0.8초 뒤에 버튼과 문구 보여주기
+  // 0.8초 뒤에 버튼, 문구, 방명록 보여주기
   setTimeout(() => {
     document.getElementById("retryBtn").classList.add("show");
     document.getElementById("captureHint").classList.add("show");
+    
+    // 방명록도 이때 같이 나타나게 함
+    const gb = document.getElementById("guestbookArea");
+    gb.style.display = "block";
   }, 800);
 }
 
@@ -332,4 +368,3 @@ function goBack(){
 </script>
 </body>
 </html>
-
