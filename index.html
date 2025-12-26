@@ -24,7 +24,8 @@ button:disabled{background:#999;cursor:not-allowed;}
   <div class="small">한 번만 가능.</div>
 </div>
 
-<script>
+  <script>
+// 사용자 명단 (총 33명)
 const USERS=[
 "고연우","곽민준","김가윤","김동균","김서현","김주은","김현우",
 "박동국","박소윤","박시온","손시우","안지연","양지민","오상현","오수아",
@@ -33,24 +34,26 @@ const USERS=[
 "김가현","김현우"
 ];
 
+// ★ 구글 웹 앱 URL (따옴표 필수) ★
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykDuVl_i-7yEwy3eSZaoc_2A4kShtI51tQxmMcwYofLjOv1ygzhHUR162egRNgu_Aq/exec";
 
-// URL 파라미터 처리 (?u=번호)
+// URL 파라미터 처리
 const p = new URLSearchParams(location.search);
 const u = parseInt(p.get("u"), 10) || 1;
-const userName = USERS[u-1] || "방문자"; [cite_start]// [cite: 3]
+const userName = USERS[u-1] || "방문자"; 
 
+// 제목에 이름 표시
 document.getElementById("title").textContent = `${userName}님. 고민 접수됨.`;
 
 function sendAndGo(){
   const worryText = document.getElementById("worryInput").value;
   const btn = document.getElementById("sendBtn");
 
-  // 버튼 비활성화 (중복 전송 방지)
+  // 버튼 비활성화
   btn.disabled = true;
   btn.textContent = "저장 중...";
 
-  // 1. 구글 시트로 데이터 전송
+  // 데이터 전송
   fetch(SCRIPT_URL, {
     method: "POST",
     mode: "no-cors", 
@@ -63,21 +66,16 @@ function sendAndGo(){
     }),
   })
   .then(() => {
-    // 2. 전송 완료 후 결과 페이지로 이동
     goNextPage();
   })
   .catch((error) => {
-    // 에러가 발생해도 사용자는 결과 페이지로 이동시켜 경험을 끊지 않음
     console.error("Error:", error);
     goNextPage();
   });
 }
 
 function goNextPage(){
-  const a = Math.floor(Math.random()*100); [cite_start]// 0~99 랜덤 답변 번호 생성 [cite: 3]
+  const a = Math.floor(Math.random()*100);
   location.href = `answer.html?u=${u}&a=${a}`;
 }
 </script>
-</body>
-
-</html>
