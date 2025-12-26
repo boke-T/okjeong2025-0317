@@ -15,8 +15,8 @@ body {
   background-size: 20px 20px;
   display: flex;
   justify-content: center;
-  align-items: center; /* 중앙 정렬 */
-  min-height: 100vh;   /* 화면 꽉 차게 */
+  align-items: center;
+  min-height: 100vh;
   color: #333;
 }
 .wrap {
@@ -25,17 +25,26 @@ body {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
+  /* 3D 효과를 위한 원근감 추가 */
+  perspective: 1000px;
 }
 
-/* 2. 결과 화면 스타일 */
+/* 2. 결과 카드 (애니메이션 적용) */
 .result-box {
   background: #fff;
   border: 3px solid #000;
   border-radius: 15px;
-  padding: 40px 20px; /* 안쪽 여백 넉넉하게 */
+  padding: 40px 20px;
   margin-top: 20px;
   box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  
+  /* ★ 뒤집기 애니메이션 핵심 코드 ★ */
+  animation: flipIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0; /* 처음에 안 보이다가 애니메이션 시작 */
+  transform-style: preserve-3d;
 }
+
+/* 3. 아이콘과 텍스트 */
 .icon {
   font-size: 80px;
   margin-bottom: 20px;
@@ -46,6 +55,8 @@ body {
   line-height: 1.4;
   font-weight: bold;
 }
+
+/* 4. 버튼 스타일 */
 button {
   margin-top: 40px;
   width: 100%;
@@ -59,10 +70,31 @@ button {
   cursor: pointer;
   box-shadow: 4px 4px 0px #000;
   transition: 0.1s;
+  
+  /* 버튼도 살짝 늦게 나타나게 하기 */
+  animation: fadeIn 1s ease-out 0.5s forwards;
+  opacity: 0;
 }
 button:active {
   transform: translate(4px, 4px);
   box-shadow: 0px 0px 0px #000;
+}
+
+/* ★ 애니메이션 정의 (키프레임) ★ */
+@keyframes flipIn {
+  0% {
+    transform: rotateY(-90deg) scale(0.8); /* 90도 돌아가고 작게 시작 */
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0deg) scale(1); /* 원래대로 */
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -91,13 +123,13 @@ const USERS=[
 "동국이","소윤이","시온이","시우","지연이","지민이","상현이","수아",
 "인성이","다해","승훈이","윤지","주아","준희","지효","태호",
 "현준이","서현이","채원이","윤하","인형이","병욱이","시윤이","준혁이",
-"가현이","현우","지윤이", "슈니", "승민이"
+"가현이","현우","지윤이", "슈니"
 ];
 
 const name = USERS[u-1] || "방문자";
-document.getElementById("userNameTitle").textContent = `${name}아(야), 해결책 도착!`;
+document.getElementById("userNameTitle").textContent = `${name}, 해결책 도착!`;
 
-// ★★★ 답변 데이터 (index.html의 눈치 기능과 호환되도록 순서 유지) ★★★
+// ★★★ 답변 데이터 (index.html과 순서 동일) ★★★
 const ANSWERS = [
   // 0~19: 기본 위로
   {icon:"🛡",text:"그건 네 잘못 아님. 절대."},
@@ -221,4 +253,3 @@ function goBack(){
 </script>
 </body>
 </html>
-
