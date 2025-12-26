@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>고민 접수</title>
+<title>보케샘의 고민 상담소</title>
 <style>
 body{margin:0;font-family:-apple-system;background:#f6f6f6;display:flex;justify-content:center}
 .wrap{max-width:420px;width:100%;padding:24px;text-align:center}
@@ -25,7 +25,6 @@ button:disabled{background:#999;cursor:not-allowed;}
 </div>
 
   <script>
-// 사용자 명단 (총 33명)
 const USERS=[
 "연우","민준이","가윤이","동균이","서현이","주은이","현우",
 "동국이","소윤이","시온이","시우","지연이","지민이","상현이","수아",
@@ -34,7 +33,6 @@ const USERS=[
 "가현이","현우","지윤"
 ];
 
-// ★ 구글 웹 앱 URL (따옴표 필수) ★
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykDuVl_i-7yEwy3eSZaoc_2A4kShtI51tQxmMcwYofLjOv1ygzhHUR162egRNgu_Aq/exec";
 
 // URL 파라미터 처리
@@ -79,6 +77,7 @@ function goNextPage(){
   location.href = `answer.html?u=${u}&a=${a}`;
 }
 </script>
+
 
 
 
