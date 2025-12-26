@@ -19,19 +19,19 @@ button:disabled{background:#999;cursor:not-allowed;}
 <div class="wrap">
   <h1 id="title"></h1>
   <p>고민 하나만 적어봄.</p>
-  <textarea id="worryInput" placeholder="적어준 고민은 저 우주로 날려보내니 걱정말라고!"></textarea>
-  <button id="sendBtn" onclick="sendAndGo()">답 받기</button>
-  <div class="small">한 번만 가능.</div>
+  <textarea id="worryInput" placeholder="적어준 고민은 답변과 함께 저 우주로 날려보내니 걱정말라고!"></textarea>
+  <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민해결 받기!</button>
+  <div class="small">하루 한 번만 가능(신중필요)</div>
 </div>
 
   <script>
 // 사용자 명단 (총 33명)
 const USERS=[
-"고연우","곽민준","김가윤","김동균","김서현","김주은","김현우",
-"박동국","박소윤","박시온","손시우","안지연","양지민","오상현","오수아",
-"위인성","이다해","이승훈","이윤지","이주아","이준희","이지효","이태호",
-"이현준","임서현","장채원","정윤하","조인형","지병욱","최시윤","최준혁",
-"김가현","김현우"
+"연우","민준이","가윤이","동균이","서현이","주은이","현우",
+"동국이","소윤이","시온이","시우","지연이","지민이","상현이","수아",
+"인성이","다해","승훈이","윤지","주아","준희","지효","태호",
+"현준이","서현이","채원이","윤하","인형이","병욱이","시윤이","준혁이",
+"가현이","현우"
 ];
 
 // ★ 구글 웹 앱 URL (따옴표 필수) ★
@@ -43,7 +43,7 @@ const u = parseInt(p.get("u"), 10) || 1;
 const userName = USERS[u-1] || "방문자"; 
 
 // 제목에 이름 표시
-document.getElementById("title").textContent = `${userName}님. 고민 접수됨.`;
+document.getElementById("title").textContent = `${userName}의 고민 접수!`;
 
 function sendAndGo(){
   const worryText = document.getElementById("worryInput").value;
@@ -79,4 +79,5 @@ function goNextPage(){
   location.href = `answer.html?u=${u}&a=${a}`;
 }
 </script>
+
 
