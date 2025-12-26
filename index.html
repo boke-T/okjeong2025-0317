@@ -91,7 +91,47 @@ button:disabled {
   <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민해결!</button>
   <div class="small">평생 무료지만 하루 한 번만 가능(신중필요)</div>
 </div>
+<div class="guestbook-area">
+    <h2>📢 떠들썩 방명록</h2>
+    <div class="padlet-frame">
+     <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px"><a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><div style="display:flex;align-items:center;"><img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="Padlet으로 만듦"></div></a></div></div>  
+      </div>
+  </div>
+  </div>
 
+  /* 방명록 영역 스타일 */
+.guestbook-area {
+  margin-top: 50px;
+  border-top: 3px dashed #aaa; /* 점선으로 구분 */
+  padding-top: 30px;
+  text-align: left;
+}
+
+.guestbook-area h2 {
+  font-family: 'Gamja Flower', cursive;
+  font-size: 24px;
+  color: #555;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 패들렛 프레임 꾸미기 */
+.padlet-frame {
+  width: 100%;
+  height: 400px; /* 방명록 높이 */
+  border: 3px solid #000; /* 검은 테두리 */
+  border-radius: 15px;
+  overflow: hidden; /* 둥근 모서리 유지 */
+  background: #fff;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+}
+
+.padlet-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none; /* 기본 테두리 제거 */
+}
+  
   <script>
 const USERS=[
 "연우","민준이","가윤이","동균이","서현이","주은이","현우",
@@ -145,6 +185,7 @@ function goNextPage(){
   location.href = `answer.html?u=${u}&a=${a}`;
 }
 </script>
+
 
 
 
