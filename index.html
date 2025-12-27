@@ -23,11 +23,33 @@ body {
   padding: 30px;
   text-align: center;
   box-sizing: border-box;
-  padding-bottom: 80px; /* 아래 여백 확보 */
+  padding-bottom: 80px;
 }
+
+/* 표지 이미지 스타일 */
+.cover-img {
+  width: 100%;             
+  border-radius: 20px;     
+  border: 3px solid #000;  
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1); 
+  margin-bottom: 20px;     
+  box-sizing: border-box;
+  
+  /* ★ 신비한 등장/퇴장 효과 추가됨 ★ */
+  /* 4초 동안, 부드럽게(ease-in-out), 무한히(infinite) 반복 */
+  animation: mysticFade 4s ease-in-out infinite;
+}
+
+/* ★ 애니메이션 정의 (키프레임) ★ */
+@keyframes mysticFade {
+  0% { opacity: 0; }   /* 처음에 투명했다가 */
+  50% { opacity: 1; }  /* 중간에 선명해지고 */
+  100% { opacity: 0; } /* 다시 투명해짐 */
+}
+
 h1 {
   font-size: 32px;
-  margin-top: 50px;
+  margin-top: 10px;        
   text-shadow: 2px 2px 0px #fff;
 }
 p {
@@ -86,7 +108,7 @@ button:disabled {
 /* 3. 방명록 영역 스타일 */
 .guestbook-area {
   margin-top: 60px;
-  border-top: 3px dashed #bbb; /* 점선 */
+  border-top: 3px dashed #bbb;
   padding-top: 40px;
   text-align: center;
 }
@@ -116,12 +138,15 @@ button:disabled {
   width: 100%;
   height: 100%;
   border: none;
-  display: block; /* 공백 제거 */
+  display: block;
 }
 </style>
 </head>
 <body>
 <div class="wrap">
+  
+  <img src="cover.jpg" alt="보케샘의 고민상담소" class="cover-img">
+
   <h1 id="title"></h1>
   <p>고민 있구나? 걱정 마 샘이 해결함!</p>
   
@@ -164,7 +189,6 @@ document.getElementById("title").textContent = `${userName}의 고민 접수!`;
 
 // ★★★ 초강력 키워드 사전 ★★★
 const KEYWORDS = {
-  // 1. 학업/시험 (공부, 성적, 입시, 학교생활) -> 20~39번
   study: [
     "공부", "시험", "성적", "등급", "내신", "수능", "모고", "모의고사", "학평",
     "중간고사", "기말고사", "수행", "수행평가", "쪽지시험", "듣기평가", "서술형",
@@ -178,8 +202,6 @@ const KEYWORDS = {
     "필기", "노트", "문제집", "쎈", "마플", "자이", "수특", "수완", "아이패드",
     "숙제", "과제", "발표", "조별", "팀플", "버스", "프리라이더", "전교", "1등", "꼴찌"
   ],
-
-  // 2. 관계/연애/친구 (인간관계, 갈등, 감정, 가족) -> 40~59번
   relation: [
     "친구", "베프", "찐친", "절친", "단짝", "무리", "왕따", "은따", "전따",
     "싸움", "다툼", "화해", "사과", "손절", "절교", "차단", "블락", "뒷담", "앞담",
@@ -192,8 +214,6 @@ const KEYWORDS = {
     "동생", "언니", "누나", "오빠", "형", "남매", "자매", "형제", "잔소리", "가출",
     "외로움", "우울", "서운", "짜증", "질투", "부러움", "쪽팔림", "흑역사", "눈치"
   ],
-
-  // 3. 음식/건강/외모 (식욕, 다이어트, 외모 고민) -> 60~79번
   food: [
     "배고", "먹", "맛", "존맛", "꿀맛", "노맛", "급식", "학식", "매점", "편의점",
     "라면", "컵라면", "불닭", "마라", "마라탕", "마라샹궈", "탕후루", "떡볶이", "엽떡",
@@ -205,8 +225,6 @@ const KEYWORDS = {
     "틴트", "렌즈", "쌍수", "성형", "머리", "헤어", "앞머리", "키", "거울", "셀카",
     "피곤", "수면", "잠", "불면증", "생리통", "두통", "배아파", "감기", "몸살", "체력"
   ],
-
-  // 4. 돈/미래/진로 (경제, 장래희망, 인생 고민) -> 80~99번
   money: [
     "돈", "용돈", "세뱃돈", "지갑", "통장", "텅장", "저금", "적금", "주식", "코인",
     "비트코인", "알바", "아르바이트", "시급", "월급", "사장님", "거지", "빈털터리",
@@ -281,7 +299,3 @@ function goNextPage(){
 </script>
 </body>
 </html>
-
-
-
-
