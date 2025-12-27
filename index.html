@@ -307,8 +307,49 @@ function goNextPage(){
   // 결과 페이지로 이동!
   location.href = `answer.html?u=${u}&a=${a}`;
 }
+// ★★★ 랜덤 문구 20개 + 3초마다 바뀌는 효과 ★★★
+const hints = [
+  "성적이 안 올라서 고민이야? ㅠㅠ",
+  "친구랑 싸웠는데 화해하고 싶어?",
+  "오늘 급식 맛없어서 우울해?",
+  "사고 싶은 물건이 있는데 돈이 없어?",
+  "짝남/짝녀 때문에 잠이 안 와?",
+  "대학 어디 가야 할지 막막해?",
+  "부모님 잔소리 때문에 힘들어?",
+  "다이어트가 뜻대로 안 돼?",
+  "자꾸 남이랑 비교하게 돼?",
+  "아무것도 하기 싫고 무기력해?",
+  "면접이나 자소서 때문에 걱정이야?",
+  "시험 날 실수할까 봐 불안해?",
+  "나만 뒤처지는 것 같아?",
+  "주말에 뭐 하고 놀지 고민이야?",
+  "선생님한테 서운한 거 있어?",
+  "반 친구들이랑 어색해서 고민이야?",
+  "밤에 잠이 잘 안 와?",
+  "내 꿈이 뭔지 아직 모르겠어?",
+  "그냥 아무한테나 털어놓고 싶어?",
+  "지금 당장 도망치고 싶어?"
+];
+
+const worryInput = document.getElementById("worryInput");
+
+function rotatePlaceholder() {
+  // 0부터 19까지 숫자 중 하나를 랜덤으로 뽑기
+  const randomIdx = Math.floor(Math.random() * hints.length);
+  
+  // 랜덤으로 뽑은 문구 적용
+  worryInput.placeholder = `${userName}, ${hints[randomIdx]}\n괜찮아 보케샘이 해결해 줄게!`;
+}
+
+// 1. 들어오자마자 한 번 실행 (빈칸 방지)
+rotatePlaceholder();
+
+// 2. 3초마다 랜덤하게 계속 변경
+setInterval(rotatePlaceholder, 3000);
+  
 </script>
 </body>
 </html>
+
 
 
