@@ -224,12 +224,12 @@ function sendAndGo(){
   const btn = document.getElementById("sendBtn");
 
   if(!worryText.trim()){
-      alert(" ${userName} 고민을 적어야 해결해주지!");
+      alert("고민을 적어야 해결해주지!");
       return;
   }
 
   btn.disabled = true;
-  btn.textContent = " ${userName} 고민 해결 중...";
+  btn.textContent = "고민 해결 중...";
 
   setTimeout(() => { goNextPage(); }, 1500);
 
@@ -281,6 +281,7 @@ function goNextPage(){
 </script>
 </body>
 </html>
+
 
 
 
