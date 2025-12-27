@@ -26,25 +26,33 @@ body {
   padding-bottom: 80px;
 }
 
-/* 표지 이미지 스타일 */
+/* ★ 신비한 표지 이미지 스타일 ★ */
 .cover-img {
   width: 100%;             
   border-radius: 20px;     
   border: 3px solid #000;  
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.1); 
-  margin-bottom: 20px;     
   box-sizing: border-box;
+  margin-bottom: 20px;
   
-  /* ★ 신비한 등장/퇴장 효과 추가됨 ★ */
-  /* 4초 동안, 부드럽게(ease-in-out), 무한히(infinite) 반복 */
-  animation: mysticFade 4s ease-in-out infinite;
+  /* 애니메이션 적용: 3초 동안 부드럽게 무한 반복 */
+  animation: magicFloat 3s ease-in-out infinite;
 }
 
-/* ★ 애니메이션 정의 (키프레임) ★ */
-@keyframes mysticFade {
-  0% { opacity: 0; }   /* 처음에 투명했다가 */
-  50% { opacity: 1; }  /* 중간에 선명해지고 */
-  100% { opacity: 0; } /* 다시 투명해짐 */
+/* ★ 둥둥 떠다니며 빛나는 애니메이션 (키프레임) ★ */
+@keyframes magicFloat {
+  0% {
+    transform: translateY(0px); /* 원래 위치 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 평범한 그림자 */
+  }
+  50% {
+    transform: translateY(-15px); /* 위로 둥둥 뜸 */
+    /* 보라색 + 금색의 신비한 오라(Aura) 발산 */
+    box-shadow: 0 25px 30px rgba(138, 43, 226, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+  100% {
+    transform: translateY(0px); /* 다시 내려옴 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
 }
 
 h1 {
@@ -145,7 +153,7 @@ button:disabled {
 <body>
 <div class="wrap">
   
-  <img src="cover.png" alt="보케샘의 고민상담소" class="cover-img">
+  <img src="cover.jpg" alt="보케샘의 고민상담소" class="cover-img">
 
   <h1 id="title"></h1>
   <p>고민 있구나? 걱정 마 샘이 해결함!</p>
@@ -299,4 +307,3 @@ function goNextPage(){
 </script>
 </body>
 </html>
-
