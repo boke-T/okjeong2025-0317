@@ -26,32 +26,32 @@ body {
   padding-bottom: 80px;
 }
 
-/* ★ 신비한 표지 이미지 스타일 ★ */
+/* ★ 수정된 표지 이미지 스타일 (배경 제거 Ver.) ★ */
 .cover-img {
   width: 100%;             
-  border-radius: 20px;     
-  border: 3px solid #000;  
-  box-sizing: border-box;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   
-  /* 애니메이션 적용: 3초 동안 부드럽게 무한 반복 */
-  animation: magicFloat 3s ease-in-out infinite;
+  /* 기존의 네모난 테두리와 그림자 제거 */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  /* 새 애니메이션 적용 */
+  animation: characterGlow 3s ease-in-out infinite;
 }
 
-/* ★ 둥둥 떠다니며 빛나는 애니메이션 (키프레임) ★ */
-@keyframes magicFloat {
-  0% {
-    transform: translateY(0px); /* 원래 위치 */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 평범한 그림자 */
+/* ★ 캐릭터 모양대로 빛나는 애니메이션 키프레임 ★ */
+@keyframes characterGlow {
+  0%, 100% {
+    transform: translateY(0px);
+    /* 약한 보라색 빛 */
+    filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.3));
   }
   50% {
-    transform: translateY(-15px); /* 위로 둥둥 뜸 */
-    /* 보라색 + 금색의 신비한 오라(Aura) 발산 */
-    box-shadow: 0 25px 30px rgba(138, 43, 226, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
-  }
-  100% {
-    transform: translateY(0px); /* 다시 내려옴 */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-15px); /* 둥둥 뜸 */
+    /* 강렬한 보라색 발광 (빛을 두 겹으로 쌓아서 더 진하게) */
+    filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8)) 
+            drop-shadow(0 0 30px rgba(138, 43, 226, 0.6));
   }
 }
 
@@ -307,4 +307,3 @@ function goNextPage(){
 </script>
 </body>
 </html>
-
