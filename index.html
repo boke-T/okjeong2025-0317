@@ -338,7 +338,7 @@ function rotatePlaceholder() {
   const randomIdx = Math.floor(Math.random() * hints.length);
   
   // 랜덤으로 뽑은 문구 적용
-  worryInput.placeholder = `${userName}, ${hints[randomIdx]}\n괜찮아 보케샘이 해결해 줄게!`;
+  worryInput.placeholder = `${userName}~ ${hints[randomIdx]} 여기에 고민을 적어봐 보케샘이 해결해 줄게!`;
 }
 
 // 1. 들어오자마자 한 번 실행 (빈칸 방지)
@@ -350,6 +350,7 @@ setInterval(rotatePlaceholder, 3000);
 </script>
 </body>
 </html>
+
 
 
 
