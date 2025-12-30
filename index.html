@@ -109,7 +109,7 @@ button:disabled {
   color: #777;
 }
 
-/* 3. 공통 섹션 제목 스타일 (방명록 & 유튜브) */
+/* 3. 공통 섹션 제목 스타일 */
 .section-title {
   font-family: 'Gamja Flower', cursive;
   font-size: 24px;
@@ -122,12 +122,18 @@ button:disabled {
   border: 2px solid #ddd;
 }
 
+/* ★ 중요: 긴 제목이 한 줄에 들어가도록 폰트 크기와 자간 조절 ★ */
+.music-title {
+  font-size: 19px; /* 24px -> 19px로 축소 */
+  letter-spacing: -1px; /* 글자 사이 간격을 좁힘 */
+  width: 90%; /* 모바일 화면 꽉 차게 */
+}
+
 /* 4. 유튜브 뮤직 영역 스타일 */
 .music-area {
-  margin-top: 50px;
+  margin-top: 60px; /* 위쪽 여백 */
   text-align: center;
 }
-/* 유튜브 영상 비율(16:9) 유지하는 반응형 박스 */
 .video-container {
   position: relative;
   width: 100%;
@@ -183,22 +189,22 @@ button:disabled {
   <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민 해결!</button>
   <div class="small">3학년 17반 한정! 평생 무료!</div>
 
+  <div class="guestbook-area">
+    <h2 class="section-title">📢 3학년 17반 방명록!</h2>
+    <div class="padlet-frame">
+      <iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
+    </div>
+  </div>
+
   <div class="music-area">
-    <h2 class="section-title">🎵 보케샘이 말아주는 Music playlist</h2>
+    <h2 class="section-title music-title">🎵 보케샘이 말아주는 Music playlist</h2>
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/5qap5aO4i9A" 
+      <iframe src="https://www.youtube.com/embed/uR3aQOgzyDU" 
               title="YouTube video player" 
               frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
               allowfullscreen>
       </iframe>
-    </div>
-  </div>
-
-  <div class="guestbook-area">
-    <h2 class="section-title">📢 3학년 17반 방명록!</h2>
-    <div class="padlet-frame">
-      <iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
     </div>
   </div>
 
@@ -334,7 +340,7 @@ function goNextPage(){
   location.href = `answer.html?u=${u}&a=${a}`;
 }
 
-// ★★★ 랜덤 문구 20개 + 3초마다 바뀌는 효과 ★★★
+// ★★★ 랜덤 문구 20개 + 5초마다 바뀌는 효과 ★★★
 const hints = [
   "성적이 안 올라서 고민이야? ㅠㅠ",
   "친구랑 싸웠는데 화해하고 싶어?",
@@ -367,7 +373,7 @@ function rotatePlaceholder() {
 }
 
 rotatePlaceholder();
-setInterval(rotatePlaceholder, 5000); // 5초!
+setInterval(rotatePlaceholder, 5000); 
   
 </script>
 </body>
