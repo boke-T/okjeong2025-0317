@@ -31,28 +31,21 @@ body {
 
 /* ★ 표지 이미지 스타일 (배경 제거 Ver.) ★ */
 .cover-img {
-  width: 100%;             
+  width: 100%;              
   margin-bottom: 10px;
-  
-  /* 기존의 네모난 테두리와 그림자 제거 */
   border: none;
   border-radius: 0;
   box-shadow: none;
-
-  /* 새 애니메이션 적용 */
   animation: characterGlow 3s ease-in-out infinite;
 }
 
-/* ★ 캐릭터 모양대로 빛나는 애니메이션 키프레임 ★ */
 @keyframes characterGlow {
   0%, 100% {
     transform: translateY(0px);
-    /* 약한 보라색 빛 */
     filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.3));
   }
   50% {
-    transform: translateY(-15px); /* 둥둥 뜸 */
-    /* 강렬한 보라색 발광 (빛을 두 겹으로 쌓아서 더 진하게) */
+    transform: translateY(-15px); 
     filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.8)) 
             drop-shadow(0 0 30px rgba(138, 43, 226, 0.6));
   }
@@ -116,18 +109,12 @@ button:disabled {
   color: #777;
 }
 
-/* 3. 방명록 영역 스타일 */
-.guestbook-area {
-  margin-top: 60px;
-  border-top: 3px dashed #bbb;
-  padding-top: 40px;
-  text-align: center;
-}
-.guestbook-area h2 {
+/* 3. 공통 섹션 제목 스타일 (방명록 & 유튜브) */
+.section-title {
   font-family: 'Gamja Flower', cursive;
-  font-size: 26px;
+  font-size: 24px;
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   background: #fff;
   display: inline-block;
   padding: 5px 15px;
@@ -135,7 +122,38 @@ button:disabled {
   border: 2px solid #ddd;
 }
 
-/* 패들렛 프레임 */
+/* 4. 유튜브 뮤직 영역 스타일 */
+.music-area {
+  margin-top: 50px;
+  text-align: center;
+}
+/* 유튜브 영상 비율(16:9) 유지하는 반응형 박스 */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  height: 0;
+  border: 3px solid #000;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 5. 방명록 영역 스타일 */
+.guestbook-area {
+  margin-top: 50px;
+  border-top: 3px dashed #bbb;
+  padding-top: 40px;
+  text-align: center;
+}
 .padlet-frame {
   width: 100%;
   height: 500px;
@@ -165,8 +183,20 @@ button:disabled {
   <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민 해결!</button>
   <div class="small">3학년 17반 한정! 평생 무료!</div>
 
+  <div class="music-area">
+    <h2 class="section-title">🎵 보케샘이 말아주는 Music playlist</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/5qap5aO4i9A" 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
   <div class="guestbook-area">
-    <h2>📢 3학년 17반 방명록!</h2>
+    <h2 class="section-title">📢 3학년 17반 방명록!</h2>
     <div class="padlet-frame">
       <iframe src="https://padlet.com/embed/otdrqaeh2g0b4mug" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write"></iframe>
     </div>
@@ -280,33 +310,30 @@ function goNextPage(){
   if (isMoving) return; 
   isMoving = true;
 
-  const text = document.getElementById("worryInput").value; // 사용자가 쓴 글
+  const text = document.getElementById("worryInput").value; 
   let min = 0;
-  let max = 19; // 기본값: 0~19번 (일반적인 위로/응원)
+  let max = 19; 
 
-  // 키워드 검사 함수 (리스트에 있는 단어가 하나라도 포함되면 true)
   const hasKeyword = (list) => list.some(word => text.includes(word));
 
-  // 우선순위에 따라 카테고리 결정
   if (hasKeyword(KEYWORDS.study)) {
-      min = 20; max = 39; // 학업 관련 답변
+      min = 20; max = 39; 
   } 
   else if (hasKeyword(KEYWORDS.relation)) {
-      min = 40; max = 59; // 관계 관련 답변
+      min = 40; max = 59; 
   } 
   else if (hasKeyword(KEYWORDS.food)) {
-      min = 60; max = 79; // 음식 관련 답변
+      min = 60; max = 79; 
   } 
   else if (hasKeyword(KEYWORDS.money)) {
-      min = 80; max = 99; // 돈/미래 관련 답변
+      min = 80; max = 99; 
   }
   
-  // 정해진 범위(min~max) 안에서 랜덤으로 번호 하나 뽑기
   const a = Math.floor(Math.random() * (max - min + 1)) + min;
   
-  // 결과 페이지로 이동!
   location.href = `answer.html?u=${u}&a=${a}`;
 }
+
 // ★★★ 랜덤 문구 20개 + 3초마다 바뀌는 효과 ★★★
 const hints = [
   "성적이 안 올라서 고민이야? ㅠㅠ",
@@ -334,25 +361,14 @@ const hints = [
 const worryInput = document.getElementById("worryInput");
 
 function rotatePlaceholder() {
-  // 0부터 19까지 숫자 중 하나를 랜덤으로 뽑기
   const randomIdx = Math.floor(Math.random() * hints.length);
   
-  // 랜덤으로 뽑은 문구 적용
-  worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]} 여기에 고민을 적어봐 보케샘이 해결해 줄게!`;
+  worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]}\n여기에 고민을 적어봐 보케샘이 해결해 줄게!`;
 }
 
-// 1. 들어오자마자 한 번 실행 (빈칸 방지)
 rotatePlaceholder();
-
-// 2. 3초마다 랜덤하게 계속 변경
-setInterval(rotatePlaceholder, 5000);
+setInterval(rotatePlaceholder, 5000); // 5초!
   
 </script>
 </body>
 </html>
-
-
-
-
-
-
