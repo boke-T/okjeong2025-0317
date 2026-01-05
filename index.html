@@ -303,7 +303,6 @@ button:disabled {
   margin: 0 3px 10px 3px;
   font-family: 'Gamja Flower', cursive;
   
-  /* [추가] 기본 글자색을 진한 회색으로 지정하여 잘 보이게 함 */
   color: #555; 
 }
 .pomo-mode-btn.active {
@@ -390,8 +389,8 @@ button:disabled {
         <button class="tab-btn" onclick="openTab('stopwatch')">🍅 뽀모도로</button>
         <button class="tab-btn" onclick="openTab('roulette')">🎲 빠른결정!</button>
         <button class="tab-btn" onclick="openTab('cookie')">🥠 포춘쿠키</button>
-        <button class="tab-btn" onclick="openTab('trash')">🗑️ 기억삭제</button>
-        <button class="tab-btn" onclick="openTab('breathe')">🧘 좀 쉬자~</button>
+        <button class="tab-btn" onclick="openTab('trash')">🗑️ 걱정삭제기</button>
+        <button class="tab-btn" onclick="openTab('breathe')">🧘 휴식시간간~</button>
       </div>
 
       <div id="dday" class="tab-content active">
@@ -416,7 +415,7 @@ button:disabled {
 
       <div id="roulette" class="tab-content">
         <p style="margin:5px 0;">고민될 땐 운명에 맡겨!</p>
-        <input type="text" id="rouletteInput" class="tool-input" placeholder="예: 짜장, 짬뽕, 볶음밥">
+        <input type="text" id="rouletteInput" class="tool-input" placeholder="예: 짜장, 짬뽕, 국어공부, 수학공부">
         <br>
         <button class="tool-btn" onclick="spinRoulette()">골라줘!</button>
         <div id="rouletteResult" class="result-box"></div>
@@ -764,3 +763,4 @@ setInterval(rotatePlaceholder, 5000);
 </script>
 </body>
 </html>
+
