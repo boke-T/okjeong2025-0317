@@ -755,7 +755,7 @@ const hints = [
 const worryInput = document.getElementById("worryInput");
 function rotatePlaceholder() {
   const randomIdx = Math.floor(Math.random() * hints.length);
-  worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]}\n여기에 고민을 적어봐 보케샘이 해결해 줄게!`;
+  worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]}\n여기에 고민을 적어봐 보케샘이 도와줄게!`;
 }
 rotatePlaceholder();
 setInterval(rotatePlaceholder, 5000); 
@@ -763,4 +763,5 @@ setInterval(rotatePlaceholder, 5000);
 </script>
 </body>
 </html>
+
 
