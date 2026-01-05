@@ -413,7 +413,7 @@ button:disabled {
 
       <div id="roulette" class="tab-content">
         <p style="margin:5px 0;">고민될 땐 운명에 맡겨!</p>
-        <input type="text" id="rouletteInput" class="tool-input" placeholder="예: 짜장, 짬뽕, 볶음밥">
+        <input type="text" id="rouletteInput" class="tool-input" placeholder="예: 국어공부, 수학공부, 영어공부">
         <br>
         <button class="tool-btn" onclick="spinRoulette()">골라줘!</button>
         <div id="rouletteResult" class="result-box"></div>
@@ -753,7 +753,7 @@ const hints = [
 const worryInput = document.getElementById("worryInput");
 function rotatePlaceholder() {
   const randomIdx = Math.floor(Math.random() * hints.length);
-  worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]}\n여기에 고민을 적어봐 보케샘이 해결해 줄게!`;
+  worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]}\n여기에 고민을 적어봐 보케샘이 도와줄게!`;
 }
 rotatePlaceholder();
 setInterval(rotatePlaceholder, 5000); 
@@ -761,6 +761,7 @@ setInterval(rotatePlaceholder, 5000);
 </script>
 </body>
 </html>
+
 
 
 
