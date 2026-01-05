@@ -200,7 +200,7 @@ button:disabled {
 /* 탭 버튼 2줄 배치 */
 .tabs {
   display: flex;
-  flex-wrap: wrap; /* 줄바꿈 허용 */
+  flex-wrap: wrap; 
   justify-content: center;
   gap: 5px;
   background: transparent;
@@ -208,7 +208,7 @@ button:disabled {
   margin-bottom: 15px;
 }
 .tab-btn {
-  flex: 1 1 30%; /* 한 줄에 3개 정도 들어가게 */
+  flex: 1 1 30%; 
   padding: 8px 0;
   cursor: pointer;
   font-family: 'Gamja Flower', cursive;
@@ -232,7 +232,7 @@ button:disabled {
 .tab-content {
   display: none; 
   padding: 15px;
-  min-height: 160px; /* 높이 약간 확보 */
+  min-height: 160px;
   text-align: center;
   background: #fff;
   border-radius: 15px;
@@ -278,22 +278,39 @@ button:disabled {
   text-shadow: 1px 1px 0 #fff;
 }
 
-/* 스톱워치용 */
-.stopwatch-display { 
-  font-size: 36px; 
-  margin: 15px auto; 
-  letter-spacing: 2px;
+/* ★★★ [NEW] 뽀모도로 타이머 스타일 ★★★ */
+.timer-display { 
+  font-size: 50px; /* 더 크게! */
+  margin: 10px auto; 
+  letter-spacing: 3px;
   background: #333;
-  color: #0f0;
+  color: #ff6b6b; /* 공부 시간 기본색 */
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   width: 80%;
-  border: 3px solid #000;
+  border: 4px solid #000;
   font-family: monospace;
-  box-shadow: inset 2px 2px 5px #000;
+  box-shadow: inset 3px 3px 8px #000;
+  transition: color 0.3s;
+}
+.pomo-mode-btn {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 2px solid #888;
+  background: #fff;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 0 3px 10px 3px;
+  font-family: 'Gamja Flower', cursive;
+}
+.pomo-mode-btn.active {
+  background: #333;
+  color: #fff;
+  border: 2px solid #000;
+  font-weight: bold;
 }
 
-/* [NEW] 멍때리기 애니메이션 */
+/* 멍때리기 애니메이션 */
 .breathe-circle {
   width: 80px; height: 80px;
   background: #a0c4ff;
@@ -309,17 +326,10 @@ button:disabled {
 }
 @keyframes breatheAnim {
   0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(2.0); opacity: 0.4; } /* 커질 때 */
-  100% { transform: scale(1); opacity: 0.8; } /* 작아질 때 */
+  50% { transform: scale(2.0); opacity: 0.4; } 
+  100% { transform: scale(1); opacity: 0.8; } 
 }
 
-/* [NEW] 걱정 삭제 애니메이션 */
-@keyframes crushAnim {
-  0% { transform: scale(1) rotate(0deg); opacity: 1; }
-  100% { transform: scale(0) rotate(720deg); opacity: 0; }
-}
-
-/* 5. 기존 영역들 */
 .music-area { margin-top: 60px; text-align: center; }
 .guestbook-area { margin-top: 50px; border-top: 3px dashed #bbb; padding-top: 40px; text-align: center; }
 .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border: 3px solid #000; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 5px 5px 0px rgba(0,0,0,0.1); }
@@ -335,7 +345,7 @@ button:disabled {
   <img src="cover.png" alt="보케샘의 고민상담소" class="cover-img">
 
   <h1 id="title"></h1>
-  <p>고민 있구나? 걱정 마 샘이 도와줄게!</p>
+  <p>고민 있구나? 걱정 마 샘이 해결해줄게!</p>
   
   <textarea id="worryInput" placeholder="여기에 고민을 적으면 한방에 해결되니 걱정말라구~"></textarea>
   <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민 해결!</button>
@@ -374,11 +384,11 @@ button:disabled {
     <div class="tool-area">
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('dday')">📅 D-Day</button>
-        <button class="tab-btn" onclick="openTab('stopwatch')">⏱️ 공부시간췤</button>
-        <button class="tab-btn" onclick="openTab('roulette')">🎲 빠른결정!</button>
-        <button class="tab-btn" onclick="openTab('cookie')">🥠 포춘쿠키</button>
-        <button class="tab-btn" onclick="openTab('trash')">🗑️ 기억삭제</button>
-        <button class="tab-btn" onclick="openTab('breathe')">🧘 휴식시간~</button>
+        <button class="tab-btn" onclick="openTab('stopwatch')">🍅 뽀모도로</button>
+        <button class="tab-btn" onclick="openTab('roulette')">🎲 결정!</button>
+        <button class="tab-btn" onclick="openTab('cookie')">🥠 운세</button>
+        <button class="tab-btn" onclick="openTab('trash')">🗑️ 삭제</button>
+        <button class="tab-btn" onclick="openTab('breathe')">🧘 멍~</button>
       </div>
 
       <div id="dday" class="tab-content active">
@@ -390,11 +400,15 @@ button:disabled {
       </div>
 
       <div id="stopwatch" class="tab-content">
-        <p style="margin:5px 0;">집중할 때 딱이야!</p>
-        <div class="stopwatch-display" id="timeDisplay">00:00:00</div>
-        <button class="tool-btn" onclick="startTimer()">시작</button>
-        <button class="tool-btn" style="background:#ffadad;" onclick="stopTimer()">멈춤</button>
-        <button class="tool-btn" style="background:#fff;" onclick="resetTimer()">리셋</button>
+        <div style="margin-bottom:5px;">
+          <button id="modeStudy" class="pomo-mode-btn active" onclick="setMode('study')">🔥 열공 (25분)</button>
+          <button id="modeRest" class="pomo-mode-btn" onclick="setMode('rest')">☕ 휴식 (5분)</button>
+        </div>
+        <div class="timer-display" id="timeDisplay">25:00</div>
+        <div id="timerMessage" style="height:20px; color:#ff6b6b; font-weight:bold; margin-bottom:5px;"></div>
+        <button class="tool-btn" onclick="startTimer()">▶ 시작</button>
+        <button class="tool-btn" style="background:#ddd;" onclick="pauseTimer()">⏸ 일시정지</button>
+        <button class="tool-btn" style="background:#fff;" onclick="resetTimer()">🔄 리셋</button>
       </div>
 
       <div id="roulette" class="tab-content">
@@ -496,28 +510,80 @@ function calcDday() {
   else resultBox.textContent = `D + ${Math.abs(dayDiff)}`;
 }
 
-// 2. 스톱워치
+// 2. 뽀모도로 타이머 (로직 교체됨)
 let timerId = null;
-let seconds = 0;
-function updateTime() {
-  seconds++;
-  const h = Math.floor(seconds / 3600).toString().padStart(2,'0');
-  const m = Math.floor((seconds % 3600) / 60).toString().padStart(2,'0');
-  const s = (seconds % 60).toString().padStart(2,'0');
-  document.getElementById("timeDisplay").textContent = `${h}:${m}:${s}`;
+let timeLeft = 25 * 60; // 기본 25분 (초 단위)
+let currentMode = 'study'; // study or rest
+let isRunning = false;
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60).toString().padStart(2,'0');
+  const s = (timeLeft % 60).toString().padStart(2,'0');
+  const display = document.getElementById("timeDisplay");
+  display.textContent = `${m}:${s}`;
+  
+  // 모드에 따라 색상 변경
+  if(currentMode === 'study') display.style.color = "#ff6b6b"; // 빨강
+  else display.style.color = "#4ecdc4"; // 민트색 (휴식)
 }
+
+function setMode(mode) {
+  pauseTimer(); // 모드 변경 시 일단 정지
+  currentMode = mode;
+  
+  // 버튼 스타일 업데이트
+  document.getElementById("modeStudy").classList.remove("active");
+  document.getElementById("modeRest").classList.remove("active");
+  
+  if(mode === 'study') {
+    timeLeft = 25 * 60;
+    document.getElementById("modeStudy").classList.add("active");
+    document.getElementById("timerMessage").textContent = "🔥 열공 모드 장전!";
+  } else {
+    timeLeft = 5 * 60;
+    document.getElementById("modeRest").classList.add("active");
+    document.getElementById("timerMessage").textContent = "☕ 달콤한 휴식 시간";
+  }
+  updateTimerDisplay();
+}
+
 function startTimer() {
-  if(timerId) return;
-  timerId = setInterval(updateTime, 1000);
+  if(isRunning) return;
+  isRunning = true;
+  document.getElementById("timerMessage").textContent = currentMode === 'study' ? "집중! 집중!" : "푹 쉬자~";
+  
+  timerId = setInterval(() => {
+    if(timeLeft > 0) {
+      timeLeft--;
+      updateTimerDisplay();
+    } else {
+      // 시간 종료
+      clearInterval(timerId);
+      isRunning = false;
+      timerId = null;
+      if(currentMode === 'study') {
+        alert("25분 공부 끝! 이제 5분 쉴까?");
+        setMode('rest');
+      } else {
+        alert("휴식 끝! 다시 공부해볼까?");
+        setMode('study');
+      }
+    }
+  }, 1000);
 }
-function stopTimer() {
+
+function pauseTimer() {
   clearInterval(timerId);
+  isRunning = false;
   timerId = null;
+  document.getElementById("timerMessage").textContent = "잠시 멈춤...";
 }
+
 function resetTimer() {
-  stopTimer();
-  seconds = 0;
-  document.getElementById("timeDisplay").textContent = "00:00:00";
+  pauseTimer();
+  // 현재 모드에 맞춰 시간 초기화
+  if(currentMode === 'study') setMode('study');
+  else setMode('rest');
 }
 
 // 3. 결정의 신
@@ -536,67 +602,33 @@ function spinRoulette() {
   }, 1000);
 }
 
-// 4. 포춘쿠키
+// 4. 포춘쿠키 (50개)
 const FORTUNES = [
-  // [공부 & 시험 운]
-  "오늘은 찍신이 강림할 운명! 연필 굴려도 정답 🎯",
-  "지금 딱 10분만 더 공부하면, 그게 시험에 나온다! 📚",
-  "수행평가 만점의 기운이 네 주위를 감싸고 있어 ✨",
-  "걱정 마, 네 뇌는 생각보다 똑똑해. 믿어봐! 🧠",
-  "졸리지? 지금 자면 꿈을 꾸지만, 지금 하면 꿈을 이뤄 (농담이고 5분만 자자) 💤",
-  "오늘 수업 시간에 쌤이랑 눈 마주치면 좋은 일 생김! 👀",
-  "모르는 문제도 정답을 피해가진 못할 거야 💪",
-  "오늘따라 필기감이 예술인데? 공부 잘될 각! 📝",
-  "야자 시간에 집중력 레전드 찍을 예정 🔥",
-  "성적표보다 중요한 건 너의 멘탈! 꽉 잡아! 💖",
-
-  // [급식 & 매점 & 먹거리]
-  "오늘 급식 메뉴, 네가 제일 좋아하는 거 나온다! 🍱",
-  "매점에 가면 1+1 행운이 기다릴지도? 🍬",
-  "주머니를 뒤져봐! 잊고 있던 천 원이 나올 거야 💸",
-  "밥 먹고 바로 눕지 마... 하지만 누우면 천국이겠지? 🛌",
-  "오늘따라 급식실 가는 발걸음이 가벼울 거야 🍗",
-  "친구 한입만 찬스! 맛있는 걸 얻어먹게 될 운명 🍫",
-  "당 떨어질 시간이야. 지금 바로 초콜릿 충전! 🔋",
-  "오늘 야식은 치킨 각이다. 부모님께 애교 부려봐 🍗",
-  "물 한 잔 마셔! 피부가 좋아질 거야 💧",
-  "오늘 먹는 건 0칼로리! 맛있게 먹으면 살 안 쪄 😋",
-
-  // [외모 & 매력 & 연애]
-  "거울 봐봐. 오늘따라 왜 이렇게 예뻐(잘생겼어)? 😎",
-  "너의 앞머리 볼륨, 오늘 하루 종일 완벽 유지! 💇‍♀️",
-  "지나가던 친구가 너 쳐다봄. 오늘 좀 빛나는데? ✨",
-  "썸 타는 사람 있어? 오늘 연락 온다. 폰 잘 봐 📱",
-  "너의 웃는 얼굴에 친구들 기분도 좋아질 거야 😊",
-  "오늘 입은 옷 핏이 예술인데? 자신감 가져! 👕",
-  "갑자기 인생샷 건질 수 있음. 카메라 켜봐 📸",
-  "너를 몰래 좋아하는 사람이 있을지도 몰라 💘",
-  "피부가 꿀피부네! 어제 뭐 했어? 🍯",
-  "오늘 너의 매력 지수: 폭발 직전 💣",
-
-  // [소소한 행운 & 일상]
-  "이어폰 꽂자마자 네 최애곡이 나올 거야 🎵",
-  "신호등이 네가 건널 때 딱 초록불로 바뀔 운명 🚦",
-  "오늘 하루는 왠지 모든 게 술술 풀릴 것 같아 🍀",
-  "뜻밖의 칭찬을 듣게 될 거야. 기분 최고! 👍",
-  "바닥을 잘 봐. 돈 주울 수도 있어 (진짜로!) 💰",
-  "오랜만에 반가운 친구에게 연락이 올 거야 📞",
-  "오늘의 럭키 컬러는 '노랑'! 주변을 찾아봐 💛",
-  "하늘을 한번 봐. 구름 모양이 너한테 인사할걸? ☁️",
-  "잃어버렸던 물건을 찾게 될지도 몰라 🔍",
-  "집 가는 길에 귀여운 고양이를 마주칠 운명 🐱",
-
-  // [위로 & 힐링 & 보케샘의 한마디]
-  "괜찮아, 망한 것 같아도 다 과정일 뿐이야 🌱",
-  "넌 존재 자체로 이미 훌륭해. 기죽지 마! 🌈",
-  "너무 애쓰지 마. 오늘은 대충 살아도 괜찮아 😌",
-  "힘들면 잠깐 쉬어가도 돼. 아무도 뭐라 안 해 쉼표(,)가 필요해.",
-  "너의 노력은 배신하지 않아. 조금만 더 버티자 👊",
-  "오늘 하루도 수고했어. 너 진짜 멋있다! 👏",
-  "걱정은 쓰레기통에, 행복은 네 주머니에! 🗑️",
-  "남들이 뭐라든 넌 너만의 속도로 가고 있어 🐢",
-  "지금 힘든 건, 나중에 대박 터지려고 그러는 거야 🎁",
-  "보케샘은 언제나 네 편이야! 알지? 파이팅! ❤️"
+  "오늘은 찍신이 강림할 운명! 연필 굴려도 정답 🎯", "지금 딱 10분만 더 공부하면, 그게 시험에 나온다! 📚",
+  "수행평가 만점의 기운이 네 주위를 감싸고 있어 ✨", "걱정 마, 네 뇌는 생각보다 똑똑해. 믿어봐! 🧠",
+  "졸리지? 지금 자면 꿈을 꾸지만, 지금 하면 꿈을 이뤄 (농담이고 5분만 자자) 💤", "오늘 수업 시간에 쌤이랑 눈 마주치면 좋은 일 생김! 👀",
+  "모르는 문제도 정답을 피해가진 못할 거야 💪", "오늘따라 필기감이 예술인데? 공부 잘될 각! 📝",
+  "야자 시간에 집중력 레전드 찍을 예정 🔥", "성적표보다 중요한 건 너의 멘탈! 꽉 잡아! 💖",
+  "오늘 급식 메뉴, 네가 제일 좋아하는 거 나온다! 🍱", "매점에 가면 1+1 행운이 기다릴지도? 🍬",
+  "주머니를 뒤져봐! 잊고 있던 천 원이 나올 거야 💸", "밥 먹고 바로 눕지 마... 하지만 누우면 천국이겠지? 🛌",
+  "오늘따라 급식실 가는 발걸음이 가벼울 거야 🍗", "친구 한입만 찬스! 맛있는 걸 얻어먹게 될 운명 🍫",
+  "당 떨어질 시간이야. 지금 바로 초콜릿 충전! 🔋", "오늘 야식은 치킨 각이다. 부모님께 애교 부려봐 🍗",
+  "물 한 잔 마셔! 피부가 좋아질 거야 💧", "오늘 먹는 건 0칼로리! 맛있게 먹으면 살 안 쪄 😋",
+  "거울 봐봐. 오늘따라 왜 이렇게 예뻐(잘생겼어)? 😎", "너의 앞머리 볼륨, 오늘 하루 종일 완벽 유지! 💇‍♀️",
+  "지나가던 친구가 너 쳐다봄. 오늘 좀 빛나는데? ✨", "썸 타는 사람 있어? 오늘 연락 온다. 폰 잘 봐 📱",
+  "너의 웃는 얼굴에 친구들 기분도 좋아질 거야 😊", "오늘 입은 옷 핏이 예술인데? 자신감 가져! 👕",
+  "갑자기 인생샷 건질 수 있음. 카메라 켜봐 📸", "너를 몰래 좋아하는 사람이 있을지도 몰라 💘",
+  "피부가 꿀피부네! 어제 뭐 했어? 🍯", "오늘 너의 매력 지수: 폭발 직전 💣",
+  "이어폰 꽂자마자 네 최애곡이 나올 거야 🎵", "신호등이 네가 건널 때 딱 초록불로 바뀔 운명 🚦",
+  "오늘 하루는 왠지 모든 게 술술 풀릴 것 같아 🍀", "뜻밖의 칭찬을 듣게 될 거야. 기분 최고! 👍",
+  "바닥을 잘 봐. 돈 주울 수도 있어 (진짜로!) 💰", "오랜만에 반가운 친구에게 연락이 올 거야 📞",
+  "오늘의 럭키 컬러는 '노랑'! 주변을 찾아봐 💛", "하늘을 한번 봐. 구름 모양이 너한테 인사할걸? ☁️",
+  "잃어버렸던 물건을 찾게 될지도 몰라 🔍", "집 가는 길에 귀여운 고양이를 마주칠 운명 🐱",
+  "괜찮아, 망한 것 같아도 다 과정일 뿐이야 🌱", "넌 존재 자체로 이미 훌륭해. 기죽지 마! 🌈",
+  "너무 애쓰지 마. 오늘은 대충 살아도 괜찮아 😌", "힘들면 잠깐 쉬어가도 돼. 쉼표(,)가 필요해.",
+  "너의 노력은 배신하지 않아. 조금만 더 버티자 👊", "오늘 하루도 수고했어. 너 진짜 멋있다! 👏",
+  "걱정은 쓰레기통에, 행복은 네 주머니에! 🗑️", "남들이 뭐라든 넌 너만의 속도로 가고 있어 🐢",
+  "지금 힘든 건, 나중에 대박 터지려고 그러는 거야 🎁", "보케샘은 언제나 네 편이야! 알지? 파이팅! ❤️"
 ];
 function openCookie() {
   const resultBox = document.getElementById("cookieResult");
@@ -710,10 +742,13 @@ function goNextPage(){
 }
 
 const hints = [
-  "성적이 안 올라서 고민이야?", "친구랑 화해하고 싶어?", "오늘 급식 맛없어?",
-  "사고 싶은 게 있어?", "대학 어디 갈지 막막해?", "부모님 잔소리 힘들어?",
-  "다이어트가 안 돼?", "남이랑 자꾸 비교돼?", "아무것도 하기 싫어?",
-  "꿈이 뭔지 모르겠어?", "잠이 잘 안 와?"
+  "성적이 안 올라서 고민이야? ㅠㅠ", "친구랑 싸웠는데 화해하고 싶어?", "오늘 급식 메뉴가 맛없는 거라 우울해?",
+  "사고 싶은 물건이 있어서 고민이야?", "짝사랑 때문에 잠이 안 와?", "대학 어디 가야 할지 막막해?",
+  "부모님 잔소리 때문에 힘들어?", "다이어트가 뜻대로 안 돼?", "요즘 자꾸 남이랑 비교하게 돼?",
+  "요즘 아무것도 하기 싫고 무기력해?", "면접이나 자소서 때문에 걱정이야?", "시험 날 실수할까 봐 불안해?",
+  "주변에서 나만 뒤처지는 것 같아?", "주말에 뭐 하고 놀지 고민이야?", "고등학교 선생님한테 서운한 거 있어?",
+  "반 친구들이랑 어색해서 고민이야?", "요즘 밤에 잠이 잘 안 와?", "내 꿈이 뭔지 아직 모르겠어?",
+  "그냥 아무한테나 뭐라도 털어놓고 싶어?", "지금 당장 어디론가 떠나고 싶어?"
 ];
 const worryInput = document.getElementById("worryInput");
 function rotatePlaceholder() {
@@ -726,7 +761,3 @@ setInterval(rotatePlaceholder, 5000);
 </script>
 </body>
 </html>
-
-
-
-
