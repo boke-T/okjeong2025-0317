@@ -127,29 +127,29 @@ button:disabled {
   width: 90%;
 }
 
-/* ★★★ [NEW] 팝업(모달) 스타일 ★★★ */
+/* ★★★ [팝업(모달)] ★★★ */
 .modal-overlay {
-  display: none; /* 평소엔 숨김 */
+  display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6); /* 배경 조금 더 진하게 */
+  background: rgba(0,0,0,0.6);
   z-index: 1000;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(2px); /* 배경 흐림 효과 추가 */
+  backdrop-filter: blur(2px);
 }
 .modal-window {
-  background: #fff9c4; /* 메인 배경색과 통일 */
-  width: 85%;
-  max-width: 350px;
-  padding: 25px 20px;
+  background: #fff9c4;
+  width: 90%;
+  max-width: 360px;
+  padding: 20px;
   border-radius: 25px;
-  border: 4px solid #000; /* 테두리 조금 더 두껍게 */
+  border: 4px solid #000;
   box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
   position: relative;
   text-align: center;
-  animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 통통 튀는 효과 */
+  animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 @keyframes popUp {
   from { transform: scale(0.5); opacity: 0; }
@@ -168,14 +168,14 @@ button:disabled {
 }
 .close-btn:hover { color: #ff6b6b; transform: scale(1.2); }
 
-/* ★★★ [NEW] 둥둥 떠다니는 버튼 (FAB) - 크기 축소 ★★★ */
+/* ★★★ [둥둥 떠다니는 버튼 (FAB)] ★★★ */
 .fab-btn {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  width: 55px; /* 크기 축소 (70 -> 55) */
+  width: 55px;
   height: 55px;
-  background: #fff; /* 흰색 배경으로 변경하여 깔끔하게 */
+  background: #fff;
   border: 3px solid #000;
   border-radius: 50%;
   font-size: 28px;
@@ -190,37 +190,38 @@ button:disabled {
 .fab-btn:hover { background: #ffec99; transform: scale(1.1); }
 .fab-btn:active { box-shadow: none; transform: translate(3px, 3px); }
 
-/* ★★★ [NEW] 도구함 내부 디자인 리뉴얼 ★★★ */
+/* ★★★ [도구함 내부] ★★★ */
 .tool-area {
   border: none; 
   box-shadow: none;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
-/* 탭 버튼 디자인: 알약 모양으로 변경 */
+/* 탭 버튼 2줄 배치 */
 .tabs {
   display: flex;
+  flex-wrap: wrap; /* 줄바꿈 허용 */
   justify-content: center;
   gap: 5px;
   background: transparent;
   border-bottom: none;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .tab-btn {
-  flex: 1;
-  padding: 8px 5px;
+  flex: 1 1 30%; /* 한 줄에 3개 정도 들어가게 */
+  padding: 8px 0;
   cursor: pointer;
   font-family: 'Gamja Flower', cursive;
-  font-size: 18px;
+  font-size: 17px;
   background: #fff;
   border: 2px solid #ccc;
-  border-radius: 20px; /* 둥글게 */
+  border-radius: 15px;
   outline: none;
   color: #888;
   transition: 0.2s;
 }
 .tab-btn.active {
-  background: #ff6b6b; /* 활성화 시 분홍색 */
+  background: #ff6b6b;
   border: 2px solid #000;
   font-weight: bold;
   color: #fff;
@@ -230,23 +231,23 @@ button:disabled {
 
 .tab-content {
   display: none; 
-  padding: 10px;
-  min-height: 150px;
+  padding: 15px;
+  min-height: 160px; /* 높이 약간 확보 */
   text-align: center;
   background: #fff;
   border-radius: 15px;
-  border: 2px dashed #aaa; /* 점선 테두리로 노트 느낌 */
+  border: 2px dashed #aaa;
 }
 .tab-content.active { display: block; }
 
-/* 입력창 & 버튼 귀엽게 */
+/* 공통 인풋 & 버튼 */
 .tool-input {
   border: 2px solid #000;
   border-radius: 10px;
   padding: 8px;
   font-family: 'Gamja Flower', cursive;
   font-size: 18px;
-  width: 70%;
+  width: 80%;
   text-align: center;
   background: #fdfdfd;
   margin-bottom: 10px;
@@ -256,13 +257,13 @@ button:disabled {
 .tool-btn {
   border: 2px solid #000;
   border-radius: 20px;
-  background: #ffec99; /* 연한 노랑 */
+  background: #ffec99;
   padding: 6px 20px;
   font-family: 'Gamja Flower', cursive;
   font-size: 20px;
   cursor: pointer;
   margin-top: 5px;
-  box-shadow: 3px 3px 0 #000; /* 그림자 추가 */
+  box-shadow: 3px 3px 0 #000;
   color: #333;
   transition: 0.1s;
 }
@@ -270,26 +271,52 @@ button:disabled {
 
 .result-box {
   margin-top: 15px;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: bold;
   color: #ff6b6b;
   min-height: 30px;
   text-shadow: 1px 1px 0 #fff;
 }
 
-/* 스톱워치 디스플레이 */
+/* 스톱워치용 */
 .stopwatch-display { 
   font-size: 36px; 
   margin: 15px auto; 
   letter-spacing: 2px;
   background: #333;
-  color: #0f0; /* 디지털 시계 느낌 */
+  color: #0f0;
   padding: 10px;
   border-radius: 10px;
   width: 80%;
   border: 3px solid #000;
-  font-family: monospace; /* 숫자 간격 일정하게 */
+  font-family: monospace;
   box-shadow: inset 2px 2px 5px #000;
+}
+
+/* [NEW] 멍때리기 애니메이션 */
+.breathe-circle {
+  width: 80px; height: 80px;
+  background: #a0c4ff;
+  border-radius: 50%;
+  margin: 20px auto;
+  box-shadow: 0 0 20px #a0c4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #fff;
+  font-weight: bold;
+}
+@keyframes breatheAnim {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(2.0); opacity: 0.4; } /* 커질 때 */
+  100% { transform: scale(1); opacity: 0.8; } /* 작아질 때 */
+}
+
+/* [NEW] 걱정 삭제 애니메이션 */
+@keyframes crushAnim {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: scale(0) rotate(720deg); opacity: 0; }
 }
 
 /* 5. 기존 영역들 */
@@ -349,6 +376,9 @@ button:disabled {
         <button class="tab-btn active" onclick="openTab('dday')">📅 D-Day</button>
         <button class="tab-btn" onclick="openTab('stopwatch')">⏱️ 타이머</button>
         <button class="tab-btn" onclick="openTab('roulette')">🎲 결정!</button>
+        <button class="tab-btn" onclick="openTab('cookie')">🥠 포키</button>
+        <button class="tab-btn" onclick="openTab('trash')">🗑️ 삭제</button>
+        <button class="tab-btn" onclick="openTab('breathe')">🧘 멍~</button>
       </div>
 
       <div id="dday" class="tab-content active">
@@ -374,6 +404,29 @@ button:disabled {
         <button class="tool-btn" onclick="spinRoulette()">골라줘!</button>
         <div id="rouletteResult" class="result-box"></div>
       </div>
+
+      <div id="cookie" class="tab-content">
+        <p style="margin:5px 0;">오늘의 행운을 확인해봐!</p>
+        <div style="font-size: 50px; cursor:pointer; transition:0.2s;" onclick="openCookie()" id="cookieIcon">🥠</div>
+        <button class="tool-btn" onclick="openCookie()">쿠키 열기</button>
+        <div id="cookieResult" class="result-box" style="font-size: 18px; margin-top:10px; word-break: keep-all; line-height:1.3;">
+          쿠키를 눌러보세요!
+        </div>
+      </div>
+
+      <div id="trash" class="tab-content">
+        <p style="margin:5px 0;">쓰잘데기 없는 걱정은 저리가!</p>
+        <input type="text" id="trashInput" class="tool-input" placeholder="여기에 걱정을 적어" style="font-size:16px;">
+        <br>
+        <button class="tool-btn" style="background:#ffadad;" onclick="crushWorry()">🗑️ 버리기</button>
+        <div id="trashResult" class="result-box" style="font-size:20px;"></div>
+      </div>
+
+      <div id="breathe" class="tab-content">
+        <p id="breatheText" style="margin:5px 0;">마음의 평화를...</p>
+        <div id="breatheCircle" class="breathe-circle">후~</div>
+        <button class="tool-btn" onclick="toggleBreathe()">시작/정지</button>
+      </div>
     </div>
   </div>
 </div>
@@ -398,23 +451,22 @@ const userName = USERS[u-1] || "방문자";
 
 document.getElementById("title").textContent = `${userName}의 고민 접수!`;
 
-// ★★★ 팝업(모달) 제어 스크립트 ★★★
+// ★★★ 팝업(모달) 제어 ★★★
 function openToolModal() {
   document.getElementById("toolModal").style.display = "flex";
 }
 function closeToolModal() {
   document.getElementById("toolModal").style.display = "none";
 }
-// 팝업 바깥(검은 배경) 누르면 닫히기
 function closeToolModalOutside(event) {
   if (event.target.id === "toolModal") {
     closeToolModal();
   }
 }
 
-// ★★★ 도구함 기능 스크립트 ★★★
+// ★★★ 도구함 기능 통합 ★★★
 
-// 1. 탭 전환 기능
+// 0. 탭 전환
 function openTab(tabName) {
   const contents = document.getElementsByClassName("tab-content");
   for(let i=0; i<contents.length; i++) contents[i].classList.remove("active");
@@ -426,7 +478,7 @@ function openTab(tabName) {
   event.target.classList.add("active");
 }
 
-// 2. D-Day 계산기
+// 1. D-Day
 function calcDday() {
   const input = document.getElementById("ddayDate").value;
   if(!input) { alert("날짜를 선택해줘!"); return; }
@@ -444,7 +496,7 @@ function calcDday() {
   else resultBox.textContent = `D + ${Math.abs(dayDiff)}`;
 }
 
-// 3. 스톱워치
+// 2. 스톱워치
 let timerId = null;
 let seconds = 0;
 function updateTime() {
@@ -468,11 +520,10 @@ function resetTimer() {
   document.getElementById("timeDisplay").textContent = "00:00:00";
 }
 
-// 4. 결정의 신
+// 3. 결정의 신
 function spinRoulette() {
   const raw = document.getElementById("rouletteInput").value;
   if(!raw.trim()) { alert("항목을 적어줘!"); return; }
-  
   const list = raw.split(",").map(s => s.trim()).filter(s => s !== "");
   if(list.length < 1) return;
 
@@ -485,14 +536,137 @@ function spinRoulette() {
   }, 1000);
 }
 
-// 기존 고민 해결 로직들...
-const KEYWORDS = {
-  study: ["공부","시험","성적","등급","내신","수능","모고","모의고사","학평","중간고사","기말고사","수행","수행평가","쪽지시험","듣기평가","서술형","세특","생기부","자소서","입시","수시","정시","대학","대학교","캠퍼스","인서울","지거국","합격","불합격","예비","광탈","재수","삼수","반수","자퇴","검정고시","휴학","전학","담임","쌤","선생님","교무실","학교","반장","부반장","학생회","동아리","자습","야자","석식","학원","과외","인강","독서실","스카","스터디카페","도서관","밤샘","벼락치기","올백","1등급","9등급","과목","국어","수학","영어","사탐","과탐","한국사","망함","망했","조짐","찍신","집중","졸려","잠와","빡공","열공","즐공","필기","노트","문제집","쎈","마플","자이","수특","수완","아이패드","숙제","과제","발표","조별","팀플","버스","프리라이더","전교","1등","꼴찌"],
-  relation: ["친구","베프","찐친","절친","단짝","무리","왕따","은따","전따","싸움","다툼","화해","사과","손절","절교","차단","블락","뒷담","앞담","꼽","시비","무시","배신","거짓말","소문","저격","박제","비호감","극혐","연애","사랑","좋아","고백","썸","썸남","썸녀","짝사랑","짝남","짝녀","남친","여친","전남친","전여친","이별","헤어짐","차임","모솔","커플","데이트","기념일","선물","편지","디엠","DM","페메","카톡","칼답","읽씹","안읽씹","프사","배사","상메","스토리","인스타","좋아요","팔로우","언팔","맞팔","비계","부계","염탐","연락","가족","엄마","아빠","부모님","엄빠","동생","언니","누나","오빠","형","남매","자매","형제","잔소리","가출","외로움","우울","서운","짜증","질투","부러움","쪽팔림","흑역사","눈치"],
-  food: ["배고","먹","맛","존맛","꿀맛","노맛","급식","학식","매점","편의점","라면","컵라면","불닭","마라","마라탕","마라샹궈","탕후루","떡볶이","엽떡","신전","치킨","피자","햄버거","맥날","맘터","롯데리아","버거킹","서브웨이","공차","버블티","스벅","아아","카페","디저트","빵","케이크","아이스크림","베라","고기","삼겹살","곱창","닭발","야식","배달","배민","요기요","폭식","입맛","다이어트","살","체중","몸무게","돼지","뚱뚱","멸치","헬스","운동","근육","복근","식단","요요","배불","꺼억","얼굴","피부","여드름","뾰루지","화장","틴트","렌즈","쌍수","성형","머리","헤어","앞머리","키","거울","셀카","피곤","수면","잠","불면증","생리통","두통","배아파","감기","몸살","체력"],
-  money: ["돈","용돈","세뱃돈","지갑","통장","텅장","저금","적금","주식","코인","비트코인","알바","아르바이트","시급","월급","사장님","거지","빈털터리","부자","재벌","건물주","로또","복권","당첨","행운","플렉스","지름신","쇼핑","비싸","세일","할인","무료","공짜","환불","중고","당근","번개","아이폰","갤럭시","에어팟","버즈","아이패드","탭","노트북","맥북","컴퓨터","게임","현질","진로","꿈","장래희망","미래","취업","직업","공무원","교사","의사","변호사","연예인","아이돌","배우","가수","유튜버","스트리머","인플루언서","성공","실패","인생","갓생","현타","멘붕","슬럼프","어른","성인","20살","민증","면허","여행"]
-};
+// 4. 포춘쿠키
+const FORTUNES = [
+  // [공부 & 시험 운]
+  "오늘은 찍신이 강림할 운명! 연필 굴려도 정답 🎯",
+  "지금 딱 10분만 더 공부하면, 그게 시험에 나온다! 📚",
+  "수행평가 만점의 기운이 네 주위를 감싸고 있어 ✨",
+  "걱정 마, 네 뇌는 생각보다 똑똑해. 믿어봐! 🧠",
+  "졸리지? 지금 자면 꿈을 꾸지만, 지금 하면 꿈을 이뤄 (농담이고 5분만 자자) 💤",
+  "오늘 수업 시간에 쌤이랑 눈 마주치면 좋은 일 생김! 👀",
+  "모르는 문제도 정답을 피해가진 못할 거야 💪",
+  "오늘따라 필기감이 예술인데? 공부 잘될 각! 📝",
+  "야자 시간에 집중력 레전드 찍을 예정 🔥",
+  "성적표보다 중요한 건 너의 멘탈! 꽉 잡아! 💖",
 
+  // [급식 & 매점 & 먹거리]
+  "오늘 급식 메뉴, 네가 제일 좋아하는 거 나온다! 🍱",
+  "매점에 가면 1+1 행운이 기다릴지도? 🍬",
+  "주머니를 뒤져봐! 잊고 있던 천 원이 나올 거야 💸",
+  "밥 먹고 바로 눕지 마... 하지만 누우면 천국이겠지? 🛌",
+  "오늘따라 급식실 가는 발걸음이 가벼울 거야 🍗",
+  "친구 한입만 찬스! 맛있는 걸 얻어먹게 될 운명 🍫",
+  "당 떨어질 시간이야. 지금 바로 초콜릿 충전! 🔋",
+  "오늘 야식은 치킨 각이다. 부모님께 애교 부려봐 🍗",
+  "물 한 잔 마셔! 피부가 좋아질 거야 💧",
+  "오늘 먹는 건 0칼로리! 맛있게 먹으면 살 안 쪄 😋",
+
+  // [외모 & 매력 & 연애]
+  "거울 봐봐. 오늘따라 왜 이렇게 예뻐(잘생겼어)? 😎",
+  "너의 앞머리 볼륨, 오늘 하루 종일 완벽 유지! 💇‍♀️",
+  "지나가던 친구가 너 쳐다봄. 오늘 좀 빛나는데? ✨",
+  "썸 타는 사람 있어? 오늘 연락 온다. 폰 잘 봐 📱",
+  "너의 웃는 얼굴에 친구들 기분도 좋아질 거야 😊",
+  "오늘 입은 옷 핏이 예술인데? 자신감 가져! 👕",
+  "갑자기 인생샷 건질 수 있음. 카메라 켜봐 📸",
+  "너를 몰래 좋아하는 사람이 있을지도 몰라 💘",
+  "피부가 꿀피부네! 어제 뭐 했어? 🍯",
+  "오늘 너의 매력 지수: 폭발 직전 💣",
+
+  // [소소한 행운 & 일상]
+  "이어폰 꽂자마자 네 최애곡이 나올 거야 🎵",
+  "신호등이 네가 건널 때 딱 초록불로 바뀔 운명 🚦",
+  "오늘 하루는 왠지 모든 게 술술 풀릴 것 같아 🍀",
+  "뜻밖의 칭찬을 듣게 될 거야. 기분 최고! 👍",
+  "바닥을 잘 봐. 돈 주울 수도 있어 (진짜로!) 💰",
+  "오랜만에 반가운 친구에게 연락이 올 거야 📞",
+  "오늘의 럭키 컬러는 '노랑'! 주변을 찾아봐 💛",
+  "하늘을 한번 봐. 구름 모양이 너한테 인사할걸? ☁️",
+  "잃어버렸던 물건을 찾게 될지도 몰라 🔍",
+  "집 가는 길에 귀여운 고양이를 마주칠 운명 🐱",
+
+  // [위로 & 힐링 & 보케샘의 한마디]
+  "괜찮아, 망한 것 같아도 다 과정일 뿐이야 🌱",
+  "넌 존재 자체로 이미 훌륭해. 기죽지 마! 🌈",
+  "너무 애쓰지 마. 오늘은 대충 살아도 괜찮아 😌",
+  "힘들면 잠깐 쉬어가도 돼. 아무도 뭐라 안 해 쉼표(,)가 필요해.",
+  "너의 노력은 배신하지 않아. 조금만 더 버티자 👊",
+  "오늘 하루도 수고했어. 너 진짜 멋있다! 👏",
+  "걱정은 쓰레기통에, 행복은 네 주머니에! 🗑️",
+  "남들이 뭐라든 넌 너만의 속도로 가고 있어 🐢",
+  "지금 힘든 건, 나중에 대박 터지려고 그러는 거야 🎁",
+  "보케샘은 언제나 네 편이야! 알지? 파이팅! ❤️"
+];
+function openCookie() {
+  const resultBox = document.getElementById("cookieResult");
+  const icon = document.getElementById("cookieIcon");
+  
+  icon.style.transform = "rotate(20deg)";
+  setTimeout(() => icon.style.transform = "rotate(-20deg)", 100);
+  setTimeout(() => icon.style.transform = "rotate(20deg)", 200);
+  setTimeout(() => icon.style.transform = "rotate(0deg)", 300);
+
+  resultBox.textContent = "두근두근...";
+  setTimeout(() => {
+    const msg = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+    resultBox.textContent = `"${msg}"`;
+    icon.textContent = "✨";
+    setTimeout(() => icon.textContent = "🥠", 2000);
+  }, 500);
+}
+
+// 5. 걱정 삭제 (애니메이션 효과)
+function crushWorry() {
+  const input = document.getElementById("trashInput");
+  const resultBox = document.getElementById("trashResult");
+  if(!input.value.trim()) { alert("걱정을 적어야 버리지!"); return; }
+
+  // 애니메이션 적용
+  input.style.transition = "all 1s ease-in";
+  input.style.transform = "scale(0) rotate(720deg) skew(20deg)";
+  input.style.opacity = "0";
+
+  setTimeout(() => {
+    // 초기화 및 결과 표시
+    input.value = "";
+    input.style.transition = "none";
+    input.style.transform = "none";
+    input.style.opacity = "1";
+    resultBox.textContent = "걱정이 사라졌어! 🍃";
+    setTimeout(() => { resultBox.textContent = ""; }, 2000);
+  }, 1000);
+}
+
+// 6. 멍 때리기 (호흡)
+let breatheInterval = null;
+function toggleBreathe() {
+  const circle = document.getElementById("breatheCircle");
+  const text = document.getElementById("breatheText");
+  
+  if(breatheInterval) {
+    // 정지
+    clearInterval(breatheInterval);
+    breatheInterval = null;
+    circle.style.animation = "none";
+    circle.textContent = "후~";
+    text.textContent = "마음의 평화를...";
+  } else {
+    // 시작
+    text.textContent = "원에 맞춰 호흡해봐";
+    circle.style.animation = "breatheAnim 6s infinite ease-in-out";
+    
+    let isInhale = true;
+    circle.textContent = "들이마셔";
+    
+    breatheInterval = setInterval(() => {
+      isInhale = !isInhale;
+      circle.textContent = isInhale ? "들이마셔" : "내쉬어";
+    }, 3000); // 애니메이션 주기의 절반
+  }
+}
+
+// --- 메인 기능 (고민 해결) ---
 function sendAndGo(){
   const worryText = document.getElementById("worryInput").value;
   const btn = document.getElementById("sendBtn");
@@ -501,35 +675,31 @@ function sendAndGo(){
       alert("고민을 적어야 해결해주지!");
       return;
   }
-
   btn.disabled = true;
   btn.textContent = "고민 해결 중...";
-
   setTimeout(() => { goNextPage(); }, 1500);
 
   fetch(SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors", 
+    method: "POST", mode: "no-cors", 
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name: userName, worry: worryText }),
   })
   .then(() => { goNextPage(); })
-  .catch((error) => {
-    console.error("Error:", error);
-    goNextPage();
-  });
+  .catch((error) => { console.error("Error:", error); goNextPage(); });
 }
 
 function goNextPage(){
   if (isMoving) return; 
   isMoving = true;
-
   const text = document.getElementById("worryInput").value; 
-  let min = 0;
-  let max = 19; 
-
+  let min = 0; let max = 19; 
+  const KEYWORDS = {
+    study: ["공부","시험","성적","등급","수능","모고","대학","합격","불합격","1등급","수학","영어","국어","망함"],
+    relation: ["친구","싸움","절교","뒷담","연애","좋아","고백","썸","이별","헤어짐","가족","엄마","잔소리"],
+    food: ["배고","먹","맛","급식","매점","라면","다이어트","살","몸무게","돼지"],
+    money: ["돈","용돈","지갑","알바","비싸","세일","아이폰","에어팟","취업","꿈","진로"]
+  };
   const hasKeyword = (list) => list.some(word => text.includes(word));
-
   if (hasKeyword(KEYWORDS.study)) { min = 20; max = 39; } 
   else if (hasKeyword(KEYWORDS.relation)) { min = 40; max = 59; } 
   else if (hasKeyword(KEYWORDS.food)) { min = 60; max = 79; } 
@@ -540,35 +710,16 @@ function goNextPage(){
 }
 
 const hints = [
-  "성적이 안 올라서 고민이야? ㅠㅠ",
-  "친구랑 싸웠는데 화해하고 싶어?",
-  "오늘 급식 메뉴가 맛없는 거라 우울해?",
-  "사고 싶은 물건이 있어서 고민이야?",
-  "짝사랑 때문에 잠이 안 와?",
-  "대학 어디 가야 할지 막막해?",
-  "부모님 잔소리 때문에 힘들어?",
-  "다이어트가 뜻대로 안 돼?",
-  "요즘 자꾸 남이랑 비교하게 돼?",
-  "요즘 아무것도 하기 싫고 무기력해?",
-  "면접이나 자소서 때문에 걱정이야?",
-  "시험 날 실수할까 봐 불안해?",
-  "주변에서 나만 뒤처지는 것 같아?",
-  "주말에 뭐 하고 놀지 고민이야?",
-  "고등학교 선생님한테 서운한 거 있어?",
-  "반 친구들이랑 어색해서 고민이야?",
-  "요즘 밤에 잠이 잘 안 와?",
-  "내 꿈이 뭔지 아직 모르겠어?",
-  "그냥 아무한테나 뭐라도 털어놓고 싶어?",
-  "지금 당장 어디론가 떠나고 싶어?"
+  "성적이 안 올라서 고민이야?", "친구랑 화해하고 싶어?", "오늘 급식 맛없어?",
+  "사고 싶은 게 있어?", "대학 어디 갈지 막막해?", "부모님 잔소리 힘들어?",
+  "다이어트가 안 돼?", "남이랑 자꾸 비교돼?", "아무것도 하기 싫어?",
+  "꿈이 뭔지 모르겠어?", "잠이 잘 안 와?"
 ];
-
 const worryInput = document.getElementById("worryInput");
-
 function rotatePlaceholder() {
   const randomIdx = Math.floor(Math.random() * hints.length);
   worryInput.placeholder = `${userName}~ 잘지내지? 근데 ${hints[randomIdx]}\n여기에 고민을 적어봐 보케샘이 해결해 줄게!`;
 }
-
 rotatePlaceholder();
 setInterval(rotatePlaceholder, 5000); 
   
