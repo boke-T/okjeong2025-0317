@@ -6,7 +6,8 @@
 <title>보케샘의 고민상담소</title>
 <meta property="og:title" content="보케샘의 고민상담소">
 <meta property="og:description" content="3학년 17반 친구들의 고민을 해결해 드립니다!">
-<meta property="og:image" content="cover.png"> <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+<meta property="og:image" content="cover.png"> 
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 <style>
 /* 1. 전체 스타일 */
 body {
@@ -126,14 +127,77 @@ button:disabled {
   width: 90%;
 }
 
-/* 4. [NEW] 만능 도구함 스타일 (탭 기능) */
-.tool-area {
-  margin-top: 50px;
-  border: 3px solid #000;
-  border-radius: 15px;
+/* ★★★ [NEW] 팝업(모달) 스타일 ★★★ */
+.modal-overlay {
+  display: none; /* 평소엔 숨김 */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); /* 반투명 검은 배경 */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.modal-window {
   background: #fff;
-  overflow: hidden;
-  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 380px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid #000;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  position: relative;
+  text-align: center;
+  animation: popUp 0.3s ease-out;
+}
+@keyframes popUp {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #888;
+  font-weight: bold;
+}
+.close-btn:hover { color: #ff6b6b; }
+
+/* ★★★ [NEW] 둥둥 떠다니는 버튼 (FAB) ★★★ */
+.fab-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 70px;
+  height: 70px;
+  background: #ffec99;
+  border: 3px solid #000;
+  border-radius: 50%;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #000;
+  z-index: 900;
+  animation: floatBtn 2s ease-in-out infinite;
+}
+.fab-btn:hover { background: #fff; }
+.fab-btn:active { box-shadow: none; transform: translate(3px, 3px); }
+
+@keyframes floatBtn {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 도구함 내부 요소 (기존 스타일 유지) */
+.tool-area {
+  /* 테두리 제거 (모달 안에 들어가므로) */
+  border: none; 
+  box-shadow: none;
+  margin-top: 10px;
 }
 .tabs {
   display: flex;
@@ -158,16 +222,12 @@ button:disabled {
   color: #ff6b6b;
 }
 .tab-content {
-  display: none; /* 기본 숨김 */
+  display: none; 
   padding: 20px;
   min-height: 150px;
   text-align: center;
 }
-.tab-content.active {
-  display: block; /* 활성화 시 보임 */
-}
-
-/* 도구함 내부 요소들 */
+.tab-content.active { display: block; }
 .tool-input {
   border: 2px solid #888;
   border-radius: 10px;
@@ -196,10 +256,9 @@ button:disabled {
   color: #ff6b6b;
   min-height: 40px;
 }
-/* 스톱워치 전용 */
 .stopwatch-display { font-size: 40px; margin: 10px 0; letter-spacing: 2px; }
 
-/* 5. 기존 영역들 (방명록, 뮤직) */
+/* 5. 기존 영역들 */
 .music-area { margin-top: 60px; text-align: center; }
 .guestbook-area { margin-top: 50px; border-top: 3px dashed #bbb; padding-top: 40px; text-align: center; }
 .video-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border: 3px solid #000; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 5px 5px 0px rgba(0,0,0,0.1); }
@@ -221,40 +280,6 @@ button:disabled {
   <button id="sendBtn" onclick="sendAndGo()">보케샘의 일타 고민 해결!</button>
   <div class="small">3학년 17반 한정! 평생 무료!</div>
 
-  <div style="margin-top:50px; text-align:left;">
-    <h2 class="section-title">🧰 보케샘의 만능 도구함</h2>
-  </div>
-  
-  <div class="tool-area">
-    <div class="tabs">
-      <button class="tab-btn active" onclick="openTab('dday')">📅 D-Day</button>
-      <button class="tab-btn" onclick="openTab('stopwatch')">⏱️ 타이머</button>
-      <button class="tab-btn" onclick="openTab('roulette')">🎲 결정!</button>
-    </div>
-
-    <div id="dday" class="tab-content active">
-      <p style="margin:0 0 10px;">목표 날짜를 입력해봐!</p>
-      <input type="date" id="ddayDate" class="tool-input">
-      <button class="tool-btn" onclick="calcDday()">계산</button>
-      <div id="ddayResult" class="result-box">D-Day는?</div>
-    </div>
-
-    <div id="stopwatch" class="tab-content">
-      <p style="margin:0;">문제 풀 때 딱이야!</p>
-      <div class="stopwatch-display" id="timeDisplay">00:00:00</div>
-      <button class="tool-btn" onclick="startTimer()">시작</button>
-      <button class="tool-btn" style="background:#ffadad;" onclick="stopTimer()">정지</button>
-      <button class="tool-btn" style="background:#ddd;" onclick="resetTimer()">리셋</button>
-    </div>
-
-    <div id="roulette" class="tab-content">
-      <p style="margin:0 0 5px;">콤마(,)로 구분해서 적어봐!</p>
-      <input type="text" id="rouletteInput" class="tool-input" placeholder="국어,수학,영어" style="width:80%;">
-      <br>
-      <button class="tool-btn" onclick="spinRoulette()">골라줘!</button>
-      <div id="rouletteResult" class="result-box">뭐가 나올까?</div>
-    </div>
-  </div>
   <div class="guestbook-area">
     <h2 class="section-title">📢 3학년 17반 방명록!</h2>
     <div class="padlet-frame">
@@ -274,6 +299,48 @@ button:disabled {
     </div>
   </div>
 
+</div>
+
+<div class="fab-btn" onclick="openToolModal()" title="만능 도구함 열기">
+  🧰
+</div>
+
+<div id="toolModal" class="modal-overlay" onclick="closeToolModalOutside(event)">
+  <div class="modal-window">
+    <span class="close-btn" onclick="closeToolModal()">&times;</span>
+    <h2 class="section-title" style="margin-top:0;">🧰 보케샘의 만능 도구함</h2>
+    
+    <div class="tool-area">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('dday')">📅 D-Day</button>
+        <button class="tab-btn" onclick="openTab('stopwatch')">⏱️ 타이머</button>
+        <button class="tab-btn" onclick="openTab('roulette')">🎲 결정!</button>
+      </div>
+
+      <div id="dday" class="tab-content active">
+        <p style="margin:0 0 10px;">목표 날짜를 입력해봐!</p>
+        <input type="date" id="ddayDate" class="tool-input">
+        <button class="tool-btn" onclick="calcDday()">계산</button>
+        <div id="ddayResult" class="result-box">D-Day는?</div>
+      </div>
+
+      <div id="stopwatch" class="tab-content">
+        <p style="margin:0;">문제 풀 때 딱이야!</p>
+        <div class="stopwatch-display" id="timeDisplay">00:00:00</div>
+        <button class="tool-btn" onclick="startTimer()">시작</button>
+        <button class="tool-btn" style="background:#ffadad;" onclick="stopTimer()">정지</button>
+        <button class="tool-btn" style="background:#ddd;" onclick="resetTimer()">리셋</button>
+      </div>
+
+      <div id="roulette" class="tab-content">
+        <p style="margin:0 0 5px;">콤마(,)로 구분해서 적어봐!</p>
+        <input type="text" id="rouletteInput" class="tool-input" placeholder="국어,수학,영어" style="width:80%;">
+        <br>
+        <button class="tool-btn" onclick="spinRoulette()">골라줘!</button>
+        <div id="rouletteResult" class="result-box">뭐가 나올까?</div>
+      </div>
+    </div>
+    </div>
 </div>
 
 <script>
@@ -296,21 +363,35 @@ const userName = USERS[u-1] || "방문자";
 
 document.getElementById("title").textContent = `${userName}의 고민 접수!`;
 
+// ★★★ 팝업(모달) 제어 스크립트 ★★★
+function openToolModal() {
+  document.getElementById("toolModal").style.display = "flex";
+}
+function closeToolModal() {
+  document.getElementById("toolModal").style.display = "none";
+}
+// 팝업 바깥(검은 배경) 누르면 닫히기
+function closeToolModalOutside(event) {
+  if (event.target.id === "toolModal") {
+    closeToolModal();
+  }
+}
+
 // ★★★ 도구함 기능 스크립트 ★★★
 
 // 1. 탭 전환 기능
 function openTab(tabName) {
-  // 모든 탭 내용 숨기기
   const contents = document.getElementsByClassName("tab-content");
   for(let i=0; i<contents.length; i++) contents[i].classList.remove("active");
   
-  // 모든 버튼 비활성화 스타일
   const btns = document.getElementsByClassName("tab-btn");
   for(let i=0; i<btns.length; i++) btns[i].classList.remove("active");
 
-  // 선택된 탭 보이기 & 버튼 활성화
   document.getElementById(tabName).classList.add("active");
-  event.currentTarget.classList.add("active");
+  // event.currentTarget 대신 직접 버튼을 찾을 수도 있지만 여기선 간단히 처리
+  // 클릭된 버튼을 찾기 위해 루프를 다시 돌지 않고, onclick에서 this를 넘겨받거나 
+  // 여기서는 event.target을 사용하여 active 클래스를 추가합니다.
+  event.target.classList.add("active");
 }
 
 // 2. D-Day 계산기
@@ -320,7 +401,6 @@ function calcDday() {
   
   const target = new Date(input);
   const today = new Date();
-  // 시간 초기화 (날짜만 비교)
   today.setHours(0,0,0,0);
   
   const diff = target - today;
@@ -356,7 +436,7 @@ function resetTimer() {
   document.getElementById("timeDisplay").textContent = "00:00:00";
 }
 
-// 4. 결정의 신 (랜덤 뽑기)
+// 4. 결정의 신
 function spinRoulette() {
   const raw = document.getElementById("rouletteInput").value;
   if(!raw.trim()) { alert("항목을 적어줘!"); return; }
